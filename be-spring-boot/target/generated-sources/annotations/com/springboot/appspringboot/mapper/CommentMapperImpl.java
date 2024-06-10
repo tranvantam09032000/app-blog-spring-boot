@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.38.0.v20240524-2033, environment: Java 17.0.11 (Eclipse Adoptium)"
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 22 (Oracle Corporation)"
 )
 @Component
 public class CommentMapperImpl implements CommentMapper {
@@ -21,11 +21,11 @@ public class CommentMapperImpl implements CommentMapper {
 
         CommentResponse.CommentResponseBuilder commentResponse = CommentResponse.builder();
 
+        commentResponse.fullName( request.getFullName() );
         commentResponse.content( request.getContent() );
         commentResponse.createdAt( request.getCreatedAt() );
-        commentResponse.fullName( request.getFullName() );
-        commentResponse.postId( request.getPostId() );
         commentResponse.updatedAt( request.getUpdatedAt() );
+        commentResponse.postId( request.getPostId() );
 
         return commentResponse.build();
     }
@@ -38,11 +38,11 @@ public class CommentMapperImpl implements CommentMapper {
 
         CommentResponse.CommentResponseBuilder commentResponse = CommentResponse.builder();
 
+        commentResponse.fullName( comment.getFullName() );
         commentResponse.content( comment.getContent() );
         commentResponse.createdAt( comment.getCreatedAt() );
-        commentResponse.fullName( comment.getFullName() );
-        commentResponse.postId( comment.getPostId() );
         commentResponse.updatedAt( comment.getUpdatedAt() );
+        commentResponse.postId( comment.getPostId() );
 
         return commentResponse.build();
     }
@@ -55,12 +55,12 @@ public class CommentMapperImpl implements CommentMapper {
 
         CommentResponse.CommentResponseBuilder commentResponse = CommentResponse.builder();
 
+        commentResponse.id( comment.getId() );
+        commentResponse.fullName( comment.getFullName() );
         commentResponse.content( comment.getContent() );
         commentResponse.createdAt( comment.getCreatedAt() );
-        commentResponse.fullName( comment.getFullName() );
-        commentResponse.id( comment.getId() );
-        commentResponse.postId( comment.getPostId() );
         commentResponse.updatedAt( comment.getUpdatedAt() );
+        commentResponse.postId( comment.getPostId() );
 
         return commentResponse.build();
     }
