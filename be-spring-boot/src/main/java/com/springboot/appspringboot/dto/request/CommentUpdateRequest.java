@@ -1,0 +1,24 @@
+package com.springboot.appspringboot.dto.request;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class CommentUpdateRequest {
+    Integer id;
+    String fullName;
+    String content;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
+    Integer postId;
+}

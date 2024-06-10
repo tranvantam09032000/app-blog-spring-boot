@@ -1,0 +1,17 @@
+<p-card [routerLink]="'/post/view/' + value?.id" class="p-0 cursor-pointer">
+  <ng-template pTemplate="header">
+    <p-image
+      [alt]="value?.title" [src]="value?.thumbnail"
+      [width]="'100'" [height]="heightImage" />
+  </ng-template>
+  <div>
+    <div [style.width.%]="90" class="text-lg mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.title}}</div>
+    <div [style.width.%]="90" class="white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.subTitle}}</div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex gap-3">
+      <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.author?.firstName}} {{value?.author?.lastName}}</span>
+      <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.createdAt}}</span>
+    </div>
+  </ng-template>
+</p-card>

@@ -1,0 +1,14 @@
+@if(isShowMenu) {
+  <p-menubar [model]="items">
+    <ng-template pTemplate="end">
+      <div class="flex align-items-center gap-2">
+        @if(isButtonUpdate) {
+          <p-button [routerLink]="'/post/update/' + id" label="Update Post" />
+        }
+        @if(isButtonCreate) {
+          <p-button [routerLink]="'/post/create'" label="Create Post" />
+        }
+      </div>
+    </ng-template>
+  </p-menubar>
+}
