@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -21,8 +22,8 @@ public class PostResponse {
     String subTitle;
     String content;
     String thumbnail;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    Date createdAt;
+    Date updatedAt;
     Boolean published;
     List<Tag> tags;
     Author author;

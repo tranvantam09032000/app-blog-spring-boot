@@ -13,6 +13,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +23,7 @@ import java.time.LocalDateTime;
 public class CommentCreateRequest {
     String fullName;
     String content;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    Date createdAt;
+    Date updatedAt;
     Integer postId;
 }

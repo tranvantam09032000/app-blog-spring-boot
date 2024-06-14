@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -19,8 +20,8 @@ public class PostUpdateRequest {
     String subTitle;
     String content;
     String thumbnail;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    Date createdAt;
+    Date updatedAt;
     Boolean published;
     Integer[] tags;
 }

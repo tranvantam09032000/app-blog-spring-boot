@@ -1,15 +1,9 @@
 package com.springboot.appspringboot.entity;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -36,8 +30,8 @@ public class Post {
     String subTitle;
     String content;
     String thumbnail;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    Date createdAt;
+    Date updatedAt;
     Boolean published;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

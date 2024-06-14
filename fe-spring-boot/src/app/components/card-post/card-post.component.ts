@@ -4,6 +4,7 @@ import {ImageModule} from "primeng/image";
 import {PrimeTemplate} from "primeng/api";
 import {IPost} from "../../models.model";
 import {RouterLink} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-card-post',
@@ -12,7 +13,8 @@ import {RouterLink} from "@angular/router";
     CardModule,
     ImageModule,
     PrimeTemplate,
-    RouterLink
+    RouterLink,
+    DatePipe
   ],
   templateUrl: './card-post.component.html',
   styleUrl: './card-post.component.scss'

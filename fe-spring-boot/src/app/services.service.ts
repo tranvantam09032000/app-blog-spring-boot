@@ -12,12 +12,11 @@ import {
   ITag
 } from "./models.model";
 import {map, Observable} from "rxjs";
-
+const URL_BASE = "http://localhost:8888/identity"
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
-
   constructor(private httpClient: HttpClient) { }
 
   getURLSearchParams(filter: Record<string, any>) {
@@ -33,51 +32,51 @@ export class ServicesService {
   }
 
   getAuthors() {
-    return this.httpClient.get<IAuthor[]>(`http://localhost:8080/identity/authors`)
+    return this.httpClient.get<IAuthor[]>(`${URL_BASE}/authors`)
   }
 
   getTags() {
-    return this.httpClient.get<ITag[]>(`http://localhost:8080/identity/tags`)
+    return this.httpClient.get<ITag[]>(`${URL_BASE}/tags`)
   }
 
   getCategories() {
-    return this.httpClient.get<ICategory[]>(`http://localhost:8080/identity/categories`)
+    return this.httpClient.get<ICategory[]>(`${URL_BASE}/categories`)
   }
 
   getCategoryById(id: string) {
-    return this.httpClient.get<ICategory>(`http://localhost:8080/identity/categories/${id}`)
+    return this.httpClient.get<ICategory>(`${URL_BASE}/categories/${id}`)
   }
 
   getPosts(filter: IFilterPost) {
     const params = this.getURLSearchParams(filter);
-    return this.httpClient.get<IPost[]>(`http://localhost:8080/identity/posts?${params}`)
+    return this.httpClient.get<IPost[]>(`${URL_BASE}/posts?${params}`)
   }
 
   getPostById(id: string) {
-    return this.httpClient.get<IPost>(`http://localhost:8080/identity/posts/${id}`)
+    return this.httpClient.get<IPost>(`${URL_BASE}/posts/${id}`)
   }
 
   createPost(body: IFormPost) {
-    return this.httpClient.post<number>(`http://localhost:8080/identity/posts`, body)
+    return this.httpClient.post<number>(`${URL_BASE}/posts`, body)
   }
 
   updatePost(body: IFormPost) {
-    return this.httpClient.put<number>(`http://localhost:8080/identity/posts/${body.id}`, body)
+    return this.httpClient.put<number>(`${URL_BASE}/posts/${body.id}`, body)
   }
 
   deletePost(id: string) {
-    return this.httpClient.delete(`http://localhost:8080/identity/posts/${id}`)
+    return this.httpClient.delete(`${URL_BASE}/posts/${id}`)
   }
 
   getCommentsByPost(id: string) {
-    return this.httpClient.get<IComment[]>(`http://localhost:8080/identity/comments/${id}`)
+    return this.httpClient.get<IComment[]>(`${URL_BASE}/comments?postId=${id}`)
   }
 
   createComment(body: IFormComment) {
-    return this.httpClient.post(`http://localhost:8080/identity/comments`, body)
+    return this.httpClient.post(`${URL_BASE}/comments`, body)
   }
 
   updateComment(body: IFormComment) {
-    return this.httpClient.put(`http://localhost:8080/identity/comments/${body.id}`, body)
+    return this.httpClient.put(`${URL_BASE}/comments/${body.id}`, body)
   }
 }

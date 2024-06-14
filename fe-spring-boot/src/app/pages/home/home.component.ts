@@ -3,10 +3,10 @@ import {Button} from "primeng/button";
 import {CardModule} from "primeng/card";
 import {DataViewModule} from "primeng/dataview";
 import {MenubarModule} from "primeng/menubar";
-import {NgClass, NgForOf} from "@angular/common";
+import {DatePipe, NgClass, NgForOf} from "@angular/common";
 import {MenuItem, PrimeTemplate} from "primeng/api";
 import {ICategory, IFilterPost, IPost} from "../../models.model";
-import {combineLatest, map, Subject, takeUntil} from "rxjs";
+import {combineLatest, map, Observable, Subject, takeUntil} from "rxjs";
 import {ServicesService} from "../../services.service";
 import {ImageModule} from "primeng/image";
 import {CardPostComponent} from "../../components/card-post/card-post.component";
@@ -28,7 +28,8 @@ type IPostByCategory = {
     PrimeTemplate,
     NgClass,
     ImageModule,
-    CardPostComponent
+    CardPostComponent,
+    DatePipe
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   getPosts(filter: IFilterPost) {
     this.servicesService.getPosts(filter).pipe(takeUntil(this.destroy$)).subscribe((values)=> {
-      this.posts = values.map(item=> ({...item, createdAt: format(new Date(item.createdAt), "yyyy/MM/dd HH:mm")}));;
+      this.posts = values.map(item=> ({...item}));
       this.postNew = this.posts[0];
       this.post5TopNew = this.posts.slice(1,6);
       this.post4TopNew = this.posts.slice(6,10);
@@ -68,16 +69,15 @@ export class HomeComponent implements OnInit, OnDestroy{
     })
   }
 
-  getPostByCategory(category: ICategory) {
-    this.servicesService.getPosts({page: 1, size: 4, categoryId: category.id.toString()}).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(
-      (values)=> {
-        this.postsByCategory.push({
+  getPostByCategory(category: ICategory): Observable<IPostByCategory> {
+    return this.servicesService.getPosts({page: 1, size: 4, categoryId: category.id.toString()}).pipe(
+      map((values)=> {
+        return {
           category: category,
           posts: values
-        });
-      }
+        }
+      }),
+      takeUntil(this.destroy$)
     )
   }
   ngOnDestroy() {

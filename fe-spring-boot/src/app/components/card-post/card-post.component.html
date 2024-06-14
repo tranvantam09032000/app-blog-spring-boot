@@ -11,7 +11,7 @@
   <ng-template pTemplate="footer">
     <div class="flex gap-3">
       <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.author?.firstName}} {{value?.author?.lastName}}</span>
-      <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.createdAt}}</span>
+      <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
     </div>
   </ng-template>
 </p-card>

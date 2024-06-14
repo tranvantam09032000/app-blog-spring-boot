@@ -1,21 +1,23 @@
 package com.springboot.appspringboot.dto.request;
+
+import com.springboot.appspringboot.entity.Author;
+import com.springboot.appspringboot.entity.Category;
 import com.springboot.appspringboot.entity.Tag;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PostMapUpdateRequest {
+@Getter
+@Setter
+public class PostDTO {
     Integer id;
-    Integer authorId;
-    Integer categoryId;
+    Author author;
+    Category category;
     String title;
     String subTitle;
     String content;

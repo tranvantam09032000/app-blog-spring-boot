@@ -1,6 +1,4 @@
 package com.springboot.appspringboot.controller;
-
-import com.springboot.appspringboot.dto.request.ApiResponse;
 import com.springboot.appspringboot.entity.Author;
 import com.springboot.appspringboot.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ public class AuthorController {
 
     @CrossOrigin
     @GetMapping()
-    List<Author> getAuthor(){
+    List<Author> getAuthor() {
         return authorService.getAuthor();
     }
 

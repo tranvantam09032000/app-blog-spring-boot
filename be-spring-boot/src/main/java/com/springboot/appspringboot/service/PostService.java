@@ -1,7 +1,9 @@
 package com.springboot.appspringboot.service;
+
 import com.springboot.appspringboot.dto.request.*;
 import com.springboot.appspringboot.dto.response.PostResponse;
 import com.springboot.appspringboot.entity.*;
+import com.springboot.appspringboot.mapper.PostMapper;
 import com.springboot.appspringboot.repository.AuthorRepository;
 import com.springboot.appspringboot.repository.CategoryRepository;
 import com.springboot.appspringboot.repository.PostRepository;
@@ -12,12 +14,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
-public class PostService{
+public class PostService {
     @Autowired
     private PostRepository postRepository;
     @Autowired
@@ -26,29 +26,29 @@ public class PostService{
     private AuthorRepository authorRepository;
     @Autowired
     private TagRepository tagRepository;
-    public Integer createPost(PostCreateRequest request){
+    @Autowired
+    private PostMapper postMapper;
+
+    public Integer createPost(PostRequestDTO request) {
 
         Category category = categoryRepository.getReferenceById(request.getCategoryId().toString());
         Author author = authorRepository.getReferenceById(request.getAuthorId().toString());
 
-        Post post = Post.builder()
-                .title(request.getTitle())
-                .subTitle(request.getSubTitle())
-                .category(category)
-                .author(author)
-                .content(request.getContent())
-                .thumbnail(request.getThumbnail())
-                .published(request.getPublished())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .build();
-
         Set<Tag> tags = new HashSet<>();
+        String[] idTags = new String[request.getTags().length];
         for (int i = 0; i < request.getTags().length; i++) {
-            Tag tag = tagRepository.getReferenceById(request.getTags()[i].toString());
-            tags.add(tag);
+            idTags[i] = String.valueOf(request.getTags()[i]);
         }
-        post.setTags(tags);
+        List<Tag> listTag = tagRepository.findAllById(List.of(idTags));
+        tags.addAll(listTag);
+
+        Post post = new Post();
+        post = postMapper.createCarPartDTO(request,post, tags, author, category);
+//        post.setCategory(category);
+//        post.setAuthor(author);
+//        post.setCreatedAt(new Date());
+//        post.setUpdatedAt(new Date());
+
         Post postResponse = postRepository.save(post);
         return postResponse.getId();
     }
@@ -69,13 +69,15 @@ public class PostService{
                 .thumbnail(request.getThumbnail())
                 .published(request.getPublished())
                 .createdAt(postById.getCreatedAt())
-                .updatedAt(LocalDateTime.now())
+                .updatedAt(new Date())
                 .build();
         Set<Tag> tags = new HashSet<>();
+        String[] idTags = new String[request.getTags().length];
         for (int i = 0; i < request.getTags().length; i++) {
-            Tag tag = tagRepository.getReferenceById(request.getTags()[i].toString());
-            tags.add(tag);
+            idTags[i] = String.valueOf(request.getTags()[i]);
         }
+        List<Tag> listTag = tagRepository.findAllById(List.of(idTags));
+        tags.addAll(listTag);
         post.setTags(tags);
         postRepository.save(post);
         return post.getId();
@@ -97,11 +99,12 @@ public class PostService{
                 .tags(new ArrayList<>(post.getTags()))
                 .build();
     }
-    public PostResponse[] getPosts(Integer page, Integer size,String categoryId) {
+
+    public PostResponse[] getPosts(Integer page, Integer size, String categoryId) {
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("id").descending());
         Page<Post> listPost = categoryId == null ?
-                postRepository.findPostsByPublished(true,pageable) :
-                postRepository.findPostsByCategory_IdAndPublished(Integer.parseInt(categoryId),true, pageable);
+                postRepository.findPostsByPublished(true, pageable) :
+                postRepository.findPostsByCategory_IdAndPublished(Integer.parseInt(categoryId), true, pageable);
         Post[] posts = listPost.getContent().toArray(new Post[listPost.getContent().size()]);
         PostResponse[] postResponses = new PostResponse[listPost.getContent().size()];
         for (int i = 0; i < posts.length; i++) {
@@ -124,7 +127,9 @@ public class PostService{
         return postResponses;
     }
 
-    public void deletePost(Integer id){
+    public void deletePost(Integer id) {
+        Post post = postRepository.findById(id.toString()).orElseThrow(() -> new RuntimeException("Post not found"));
+        post.getTags().removeAll(post.getTags());
         postRepository.deleteById(id.toString());
     }
 }

@@ -1,4 +1,5 @@
 package com.springboot.appspringboot.service;
+
 import com.springboot.appspringboot.entity.Tag;
 import com.springboot.appspringboot.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ public class TagService {
     private TagRepository tagRepository;
 
     public List<Tag> getTags() {
-        List<Tag> listTag = tagRepository.findAll();
-        return listTag;
+        return tagRepository.findAll();
     }
 }

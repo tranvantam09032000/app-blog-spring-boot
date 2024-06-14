@@ -1,14 +1,3 @@
 
-Q	java:S125"<This block of commented-out lines of code should be removed.(‚§Ùæ
-r
-java:S1128"WRemove this unused import 'com.springboot.appspringboot.dto.request.PostCreateRequest'.(»Ü‰îùÿÿÿÿ
-u
-java:S1128"ZRemove this unused import 'com.springboot.appspringboot.dto.request.PostMapUpdateRequest'.(¹è€Æúÿÿÿÿ
-r
-java:S1128"WRemove this unused import 'com.springboot.appspringboot.dto.request.PostUpdateRequest'.(£Ì¿ıÿÿÿÿ
-n
-java:S1128"SRemove this unused import 'com.springboot.appspringboot.dto.response.PostResponse'.(¹ÙÍ¬ûÿÿÿÿ
-`
-java:S1128"ERemove this unused import 'com.springboot.appspringboot.entity.Post'.(ª¿Ø³úÿÿÿÿ
-N
-java:S1128	"8Remove this unused import 'org.mapstruct.MappingTarget'.(ö’è¾
+•
+java:S1128"MRemove this unused import 'com.springboot.appspringboot.dto.request.PostDTO'.(Ûø ¨ÿÿÿÿÿ8ØÀ¡”2J$deeb8fab-ad02-44b4-a8a8-67110d23f46a

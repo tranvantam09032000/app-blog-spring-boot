@@ -1,11 +1,3 @@
 
-X
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ
-M
-java:S6856"2Bind path variable "postId" to a method parameter.(°áÁšüÿÿÿÿ
-g
-java:S1128"QRemove this unused import 'com.springboot.appspringboot.dto.request.ApiResponse'.(è˜¶‚
-_
-java:S1128"IRemove this unused import 'com.springboot.appspringboot.entity.Category'.(ŠÆÑÍ
-g
-java:S1128	"QRemove this unused import 'com.springboot.appspringboot.service.CategoryService'.(šéï™
+~
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞJ$66774d09-2241-42ae-bc8d-681490da4fec

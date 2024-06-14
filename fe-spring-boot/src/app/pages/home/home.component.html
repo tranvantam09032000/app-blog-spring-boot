@@ -13,7 +13,7 @@
                 <div>{{item.title}}</div>
                 <div class="flex align-items-center justify-content-between mt-3">
                   <span class="text-sm text-500">{{item.author.firstName}} {{item.author.lastName}}</span>
-                  <span class="text-sm text-500">{{item.createdAt}}</span>
+                  <span class="text-sm text-500">{{item.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
                 </div>
               </div>
             </div>
@@ -47,7 +47,7 @@
             <ng-template pTemplate="footer">
               <div class="flex gap-3">
                 <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{post?.author?.firstName}} {{post?.author?.lastName}}</span>
-                <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{post?.createdAt}}</span>
+                <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{post?.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
               </div>
             </ng-template>
           </p-card>

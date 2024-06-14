@@ -14,26 +14,30 @@ public class PostController {
 
     @CrossOrigin
     @PostMapping
-    Integer createPost(@RequestBody PostCreateRequest request){
+    Integer createPost(@RequestBody PostRequestDTO request) {
         return postService.createPost(request);
     }
+
     @CrossOrigin
     @PutMapping("/{id}")
-    Integer updatePost(@PathVariable Integer id, @RequestBody PostUpdateRequest request){
-        return postService.updatePost(id,request);
+    Integer updatePost(@PathVariable Integer id, @RequestBody PostUpdateRequest request) {
+        return postService.updatePost(id, request);
     }
+
     @CrossOrigin
     @GetMapping("/{id}")
-    PostResponse getPostByid(@PathVariable Integer id){
+    PostResponse getPostByid(@PathVariable Integer id) {
         return postService.getPostById(id);
     }
+
     @CrossOrigin
     @GetMapping()
     PostResponse[] getPosts(@RequestParam(required = false, defaultValue = "1") Integer page,
-                                         @RequestParam(required = false, defaultValue = "10") Integer size,
-                                         @RequestParam(required = false) String categoryId){
-        return postService.getPosts(page,size,categoryId);
+                            @RequestParam(required = false, defaultValue = "10") Integer size,
+                            @RequestParam(required = false) String categoryId) {
+        return postService.getPosts(page, size, categoryId);
     }
+
     @CrossOrigin
     @DeleteMapping("/{id}")
     void deletePost(@PathVariable Integer id) {

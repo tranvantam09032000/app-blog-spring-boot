@@ -1,24 +1,21 @@
 package com.springboot.appspringboot.dto.request;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+import java.util.Date;
+
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PostCreateRequest {
+public class PostRequestDTO {
     Integer authorId;
     Integer categoryId;
     String title;
     String subTitle;
     String content;
     String thumbnail;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    Date createdAt;
+    Date updatedAt;
     Boolean published;
     Integer[] tags;
 }
