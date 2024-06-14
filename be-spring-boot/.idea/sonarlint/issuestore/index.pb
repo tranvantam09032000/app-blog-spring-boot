@@ -93,3 +93,9 @@ z
 Jsrc/main/java/com/springboot/appspringboot/dto/request/PostRequestDTO.java,5/3/5317a29e953cc5caa9017d054e4327e859c44196
 Å
 Q.idea/sonarlint/securityhotspotstore/d/f/df0fbb6e727134e381d42b25716741e9fe297c40,9/6/9648025240b1e1774269c915f9d2f37882ad484f
+Å
+Q.idea/sonarlint/securityhotspotstore/5/7/5742b4e18eb8284cfeadcb3f76594c9a1725538b,4/d/4dd4583541305442eb0f0c9d5d45250898c39cdb
+Å
+Q.idea/sonarlint/securityhotspotstore/5/3/5317a29e953cc5caa9017d054e4327e859c44196,0/2/02a783841372ef5e94f29ac482ac2cba46b0edd2
+w
+G.idea/sonarlint/issuestore/5/3/5317a29e953cc5caa9017d054e4327e859c44196,c/1/c12e56178729a4beb54908030ade1ccb6dc15424
