@@ -12,7 +12,7 @@ import {
   ITag
 } from "./models.model";
 import {map, Observable} from "rxjs";
-const URL_BASE = "http://localhost:8888/identity"
+const URL_BASE = "http://localhost:8080/identity"
 @Injectable({
   providedIn: 'root'
 })
