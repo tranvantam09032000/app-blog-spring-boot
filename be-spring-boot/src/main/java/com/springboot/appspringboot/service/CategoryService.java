@@ -13,7 +13,7 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public Category getCategoryById(Integer id) {
-        return categoryRepository.findById(id.toString()).orElseThrow(() -> new RuntimeException("Category not found"));
+        return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
     }
 
     public List<Category> getCategories() {

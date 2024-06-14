@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "post")
-@Builder
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -20,7 +20,7 @@ public class PostController {
 
     @CrossOrigin
     @PutMapping("/{id}")
-    Integer updatePost(@PathVariable Integer id, @RequestBody PostUpdateRequest request) {
+    Integer updatePost(@PathVariable Integer id, @RequestBody PostRequestDTO request) {
         return postService.updatePost(id, request);
     }
 

@@ -1,11 +1,10 @@
 package com.springboot.appspringboot.mapper;
 
 import com.springboot.appspringboot.dto.request.PostRequestDTO;
-import com.springboot.appspringboot.entity.Author;
-import com.springboot.appspringboot.entity.Category;
 import com.springboot.appspringboot.entity.Post;
-import com.springboot.appspringboot.entity.Tag;
-import java.util.Set;
+import com.springboot.appspringboot.repository.AuthorRepository;
+import com.springboot.appspringboot.repository.CategoryRepository;
+import com.springboot.appspringboot.repository.TagRepository;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +16,14 @@ import org.springframework.stereotype.Component;
 public class PostMapperImpl implements PostMapper {
 
     @Override
-    public Post createCarPartDTO(PostRequestDTO postRequestDTO, Post post, Set<Tag> tags, Author author, Category category) {
+    public Post createCarPartDTO(PostRequestDTO postRequestDTO, AuthorRepository authorRepository, CategoryRepository categoryRepository, TagRepository tagRepository) {
         if ( postRequestDTO == null ) {
-            return post;
+            return null;
         }
 
+        Post post = new Post();
+
+        post.setId( postRequestDTO.getId() );
         post.setTitle( postRequestDTO.getTitle() );
         post.setSubTitle( postRequestDTO.getSubTitle() );
         post.setContent( postRequestDTO.getContent() );
@@ -29,6 +31,8 @@ public class PostMapperImpl implements PostMapper {
         post.setCreatedAt( postRequestDTO.getCreatedAt() );
         post.setUpdatedAt( postRequestDTO.getUpdatedAt() );
         post.setPublished( postRequestDTO.getPublished() );
+
+        setAuthor( postRequestDTO, post, authorRepository, categoryRepository, tagRepository );
 
         return post;
     }

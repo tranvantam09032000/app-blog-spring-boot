@@ -27,7 +27,7 @@ public class CommentService {
     }
 
     public Integer createComment(CommentCreateRequest request) {
-        Post post = postRepository.findById(request.getPostId().toString()).orElseThrow(() -> new RuntimeException("Post not found"));
+        Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> new RuntimeException("Post not found"));
         Comment comment = Comment.builder()
                 .fullName(request.getFullName())
                 .content(request.getContent())
@@ -41,9 +41,9 @@ public class CommentService {
     }
 
     public Integer updateComment(Integer id, CommentUpdateRequest request) {
-        Comment commentById = commentRepository.findById(id.toString()).orElseThrow(() -> new RuntimeException("Comment not found"));
+        Comment commentById = commentRepository.findById(id).orElseThrow(() -> new RuntimeException("Comment not found"));
 
-        Post post = postRepository.getReferenceById(request.getPostId().toString());
+        Post post = postRepository.getReferenceById(request.getPostId());
 
         Comment comment = Comment.builder()
                 .id(id)
@@ -58,6 +58,6 @@ public class CommentService {
     }
 
     public void deleteComment(Integer id) {
-        commentRepository.deleteById(id.toString());
+        commentRepository.deleteById(id);
     }
 }

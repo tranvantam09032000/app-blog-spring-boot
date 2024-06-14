@@ -8,6 +8,7 @@ import java.util.Date;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PostRequestDTO {
+    Integer id;
     Integer authorId;
     Integer categoryId;
     String title;

@@ -31,60 +31,25 @@ public class PostService {
 
     public Integer createPost(PostRequestDTO request) {
 
-        Category category = categoryRepository.getReferenceById(request.getCategoryId().toString());
-        Author author = authorRepository.getReferenceById(request.getAuthorId().toString());
-
-        Set<Tag> tags = new HashSet<>();
-        String[] idTags = new String[request.getTags().length];
-        for (int i = 0; i < request.getTags().length; i++) {
-            idTags[i] = String.valueOf(request.getTags()[i]);
-        }
-        List<Tag> listTag = tagRepository.findAllById(List.of(idTags));
-        tags.addAll(listTag);
-
-        Post post = new Post();
-        post = postMapper.createCarPartDTO(request,post, tags, author, category);
-//        post.setCategory(category);
-//        post.setAuthor(author);
-//        post.setCreatedAt(new Date());
-//        post.setUpdatedAt(new Date());
+        Post post = postMapper.createCarPartDTO(request, authorRepository, categoryRepository, tagRepository);
+        post.setCreatedAt(new Date());
+        post.setUpdatedAt(new Date());
 
         Post postResponse = postRepository.save(post);
         return postResponse.getId();
     }
 
-    public Integer updatePost(Integer id, PostUpdateRequest request) {
-        Post postById = postRepository.findById(id.toString()).orElseThrow(() -> new RuntimeException("Post not found"));
-
-        Category category = categoryRepository.getReferenceById(request.getCategoryId().toString());
-        Author author = authorRepository.getReferenceById(request.getAuthorId().toString());
-
-        Post post = Post.builder()
-                .id(id)
-                .title(request.getTitle())
-                .subTitle(request.getSubTitle())
-                .category(category)
-                .author(author)
-                .content(request.getContent())
-                .thumbnail(request.getThumbnail())
-                .published(request.getPublished())
-                .createdAt(postById.getCreatedAt())
-                .updatedAt(new Date())
-                .build();
-        Set<Tag> tags = new HashSet<>();
-        String[] idTags = new String[request.getTags().length];
-        for (int i = 0; i < request.getTags().length; i++) {
-            idTags[i] = String.valueOf(request.getTags()[i]);
-        }
-        List<Tag> listTag = tagRepository.findAllById(List.of(idTags));
-        tags.addAll(listTag);
-        post.setTags(tags);
+    public Integer updatePost(Integer id, PostRequestDTO request) {
+        Post postById = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        Post post = postMapper.createCarPartDTO(request, authorRepository, categoryRepository, tagRepository);
+        post.setCreatedAt(postById.getCreatedAt());
+        post.setUpdatedAt(new Date());
         postRepository.save(post);
         return post.getId();
     }
 
     public PostResponse getPostById(Integer id) {
-        Post post = postRepository.findById(id.toString()).orElseThrow(() -> new RuntimeException("Post not found"));
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         return PostResponse.builder()
                 .id(id)
                 .title(post.getTitle())
@@ -128,8 +93,8 @@ public class PostService {
     }
 
     public void deletePost(Integer id) {
-        Post post = postRepository.findById(id.toString()).orElseThrow(() -> new RuntimeException("Post not found"));
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         post.getTags().removeAll(post.getTags());
-        postRepository.deleteById(id.toString());
+        postRepository.deleteById(id);
     }
 }
