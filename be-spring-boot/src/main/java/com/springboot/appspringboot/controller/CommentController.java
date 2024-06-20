@@ -1,5 +1,5 @@
 package com.springboot.appspringboot.controller;
-import com.springboot.appspringboot.dto.request.CommentCreateRequest;
+import com.springboot.appspringboot.dto.request.CommentRequestDTO;
 import com.springboot.appspringboot.dto.request.CommentUpdateRequest;
 import com.springboot.appspringboot.entity.Comment;
 import com.springboot.appspringboot.service.CommentService;
@@ -22,13 +22,13 @@ public class CommentController {
 
     @CrossOrigin
     @PostMapping()
-    Integer createComment(@RequestBody CommentCreateRequest request) {
+    Integer createComment(@RequestBody CommentRequestDTO request) {
         return commentService.createComment(request);
     }
 
     @CrossOrigin
     @PutMapping("/{id}")
-    Integer updateComment(@PathVariable Integer id, @RequestBody CommentUpdateRequest request) {
+    Integer updateComment(@PathVariable Integer id, @RequestBody CommentRequestDTO request) {
         return commentService.updateComment(id, request);
     }
 

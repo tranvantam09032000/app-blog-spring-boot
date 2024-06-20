@@ -1,7 +1,17 @@
 
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÛÜ‚å€2J$45b1debe-87be-4551-a398-70d4cdee928e
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ö¢‰×2J$82b12c8f-ffd0-417d-97ef-65af49f1e571
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÛÜ‚å€2J$187e3267-3523-45f3-80a5-0d546e792f97
-–
-java:S1128"NRemove this unused import 'com.springboot.appspringboot.mapper.CommentMapper'.(ÑÁĞŠùÿÿÿÿ8¹à›Ä2J$9ef7432e-5a31-4b99-8f0c-873a7524a761
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ö¢‰×2J$1421ca92-9353-4291-b331-14a6fb7e99a7
+…
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ö¢‰×2J$bbe8f2fd-c862-453a-b8bb-13e73fb837c0
+‚
+java:S1854&"?Remove this useless assignment to local variable "commentById".(ÒêÀë8¥ã¸×2J$3335506f-e4b8-461a-a839-6cf0e2602266
+s
+java:S1481&"0Remove this unused "commentById" local variable.(ÒêÀë8¦ã¸×2J$15f23d26-ca87-4b35-91f0-466f77f9c7b9
+¢
+java:S1128"ZRemove this unused import 'com.springboot.appspringboot.dto.request.CommentUpdateRequest'.(«î‚íùÿÿÿÿ8ª”×2J$0fc17352-fa4a-43e1-8ed4-ae6d058ab9df
+
+java:S1128"ERemove this unused import 'com.springboot.appspringboot.entity.Post'.(ª¿Ø³úÿÿÿÿ8ª”×2J$4868ea66-141b-4568-9b97-4a6664efae16
+H
+java:S1128"+Remove this unused import 'java.util.Date'.(¸…¼ü8İû¸×2

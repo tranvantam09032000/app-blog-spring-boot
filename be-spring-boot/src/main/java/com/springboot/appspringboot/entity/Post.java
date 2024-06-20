@@ -1,10 +1,14 @@
 package com.springboot.appspringboot.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.springboot.appspringboot.abstracts.AuditableAbstract;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import java.util.Date;
+import org.hibernate.envers.Audited;
 import java.util.Set;
+
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 @Entity
 @Getter
@@ -12,25 +16,23 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Audited(targetAuditMode = NOT_AUDITED)
 @Table(name = "post")
-public class Post {
+public class Post extends AuditableAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     @ManyToOne
     @JoinColumn(name = "authorId")
-    @JsonManagedReference
+    @JsonIgnore
     Author author;
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    @JsonManagedReference
+    @JsonIgnore
     Category category;
     String title;
     String subTitle;
-    String content;
     String thumbnail;
-    Date createdAt;
-    Date updatedAt;
     Boolean published;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -38,8 +40,12 @@ public class Post {
             joinColumns = @JoinColumn(name = "postId"),
             inverseJoinColumns = @JoinColumn(name = "tagId")
     )
-    @JsonManagedReference
+    @JsonIgnore
     Set<Tag> tags;
+    @JsonIgnore
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     Set<Comment> comments;
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    Set<PostContent> contents;
 }

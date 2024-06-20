@@ -8,6 +8,7 @@ import {ImageModule} from "primeng/image";
 import {TagModule} from "primeng/tag";
 import {format} from "date-fns";
 import {CommentsComponent} from "../../components/comments/comments.component";
+import {GalleriaModule} from "primeng/galleria";
 
 @Component({
   selector: 'app-view-post',
@@ -15,16 +16,18 @@ import {CommentsComponent} from "../../components/comments/comments.component";
   imports: [
     ImageModule,
     TagModule,
-    CommentsComponent
+    CommentsComponent,
+    GalleriaModule
   ],
   templateUrl: './view-post.component.html',
   styleUrl: './view-post.component.scss'
 })
-export class ViewPostComponent implements OnInit, OnDestroy{
+export class ViewPostComponent implements OnInit, OnDestroy {
 
   post?: IPost;
   destroy$ = new Subject();
-  constructor(private route: ActivatedRoute, private servicesService:ServicesService,
+
+  constructor(private route: ActivatedRoute, private servicesService: ServicesService,
               private router: Router, private messageService: MessageService) {
   }
 
@@ -33,7 +36,7 @@ export class ViewPostComponent implements OnInit, OnDestroy{
       takeUntil(this.destroy$)
     ).subscribe((params) => {
       const id = params.get('id') || '';
-      if(id) {
+      if (id) {
         this.getPostById(id);
       }
     });
@@ -43,18 +46,33 @@ export class ViewPostComponent implements OnInit, OnDestroy{
     this.servicesService.getPostById(id).pipe(
       takeUntil(this.destroy$)
     ).subscribe(
-      {next: (post)=> {
-          this.post = {...post, createdAt: format(new Date(post.createdAt), "yyyy/MM/dd HH:mm")};
+      {
+        next: (post) => {
+          const contents = post.contents.map((item) => {
+            if (item.type === "slider") {
+              return {...item, value: item.value.toString().split(',')}
+            } else {
+              return item;
+            }
+          })
+          this.post = {
+            ...post,
+            contents: contents.sort((a, b) => a.position - b.position),
+            createdAt: format(new Date(post.createdAt), "yyyy/MM/dd HH:mm")
+          };
         },
-        error: (error)=> {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Post not found' });
+        error: (error) => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Post not found'});
 
           this.router.navigateByUrl("/home");
-        }}
+        }
+      }
     )
   }
 
   ngOnDestroy() {
     this.destroy$.next(null);
   }
+
+  protected readonly Array = Array;
 }

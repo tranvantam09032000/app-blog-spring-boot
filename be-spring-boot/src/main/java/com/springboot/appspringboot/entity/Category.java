@@ -1,6 +1,7 @@
 package com.springboot.appspringboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +21,7 @@ public class Category {
     Integer id;
     String title;
     Integer subCategory;
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     Set<Post> posts;
 }

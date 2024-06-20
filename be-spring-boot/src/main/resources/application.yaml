@@ -14,4 +14,9 @@ spring:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        envers:
+          audit_table_suffix: _aud
+          store_data_at_delete: true
     show-sql: true

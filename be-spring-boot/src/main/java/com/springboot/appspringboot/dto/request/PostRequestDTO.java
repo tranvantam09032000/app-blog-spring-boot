@@ -1,8 +1,11 @@
 package com.springboot.appspringboot.dto.request;
+import com.springboot.appspringboot.entity.PostContent;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,10 +16,10 @@ public class PostRequestDTO {
     Integer categoryId;
     String title;
     String subTitle;
-    String content;
     String thumbnail;
     Date createdAt;
     Date updatedAt;
     Boolean published;
     Integer[] tags;
+    PostContent[] contents;
 }

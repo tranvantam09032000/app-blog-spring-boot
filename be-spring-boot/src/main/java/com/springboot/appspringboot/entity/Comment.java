@@ -1,28 +1,30 @@
 package com.springboot.appspringboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboot.appspringboot.abstracts.AuditableAbstract;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import java.util.Date;
+import org.hibernate.envers.Audited;
+
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Audited(targetAuditMode = NOT_AUDITED)
 @Table(name = "comment")
-@Builder
-public class Comment {
+public class Comment extends AuditableAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     String fullName;
     String content;
-    Date createdAt;
-    Date updatedAt;
     @ManyToOne
     @JoinColumn(name = "postId")
-    @JsonBackReference
+    @JsonIgnore
     Post post;
 }

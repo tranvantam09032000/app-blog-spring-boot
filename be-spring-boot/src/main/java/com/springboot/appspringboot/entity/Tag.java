@@ -1,6 +1,7 @@
 package com.springboot.appspringboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,6 @@ public class Tag {
     Integer id;
     String title;
     @ManyToMany(mappedBy = "tags")
-    @JsonBackReference
+    @JsonIgnore
     Set<Post> posts;
 }

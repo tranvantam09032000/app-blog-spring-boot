@@ -1,8 +1,8 @@
 package com.springboot.appspringboot.mapper;
 
-import com.springboot.appspringboot.dto.request.CommentCreateRequest;
-import com.springboot.appspringboot.dto.request.CommentUpdateRequest;
-import com.springboot.appspringboot.dto.response.CommentResponse;
+import com.springboot.appspringboot.dto.request.CommentRequestDTO;
+import com.springboot.appspringboot.entity.Comment;
+import com.springboot.appspringboot.repository.PostRepository;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
@@ -14,54 +14,21 @@ import org.springframework.stereotype.Component;
 public class CommentMapperImpl implements CommentMapper {
 
     @Override
-    public CommentResponse toComment(CommentCreateRequest request) {
-        if ( request == null ) {
+    public Comment commentRequestToComment(CommentRequestDTO commentRequestDTO, PostRepository postRepository) {
+        if ( commentRequestDTO == null ) {
             return null;
         }
 
-        CommentResponse.CommentResponseBuilder commentResponse = CommentResponse.builder();
+        Comment comment = new Comment();
 
-        commentResponse.fullName( request.getFullName() );
-        commentResponse.content( request.getContent() );
-        commentResponse.createdAt( request.getCreatedAt() );
-        commentResponse.updatedAt( request.getUpdatedAt() );
-        commentResponse.postId( request.getPostId() );
+        comment.setCreatedAt( commentRequestDTO.getCreatedAt() );
+        comment.setUpdatedAt( commentRequestDTO.getUpdatedAt() );
+        comment.setId( commentRequestDTO.getId() );
+        comment.setFullName( commentRequestDTO.getFullName() );
+        comment.setContent( commentRequestDTO.getContent() );
 
-        return commentResponse.build();
-    }
+        setPost( commentRequestDTO, comment, postRepository );
 
-    @Override
-    public CommentResponse toCommentResponse(CommentCreateRequest comment) {
-        if ( comment == null ) {
-            return null;
-        }
-
-        CommentResponse.CommentResponseBuilder commentResponse = CommentResponse.builder();
-
-        commentResponse.fullName( comment.getFullName() );
-        commentResponse.content( comment.getContent() );
-        commentResponse.createdAt( comment.getCreatedAt() );
-        commentResponse.updatedAt( comment.getUpdatedAt() );
-        commentResponse.postId( comment.getPostId() );
-
-        return commentResponse.build();
-    }
-
-    @Override
-    public CommentResponse toCommentResponse(CommentUpdateRequest comment) {
-        if ( comment == null ) {
-            return null;
-        }
-
-        CommentResponse.CommentResponseBuilder commentResponse = CommentResponse.builder();
-
-        commentResponse.id( comment.getId() );
-        commentResponse.fullName( comment.getFullName() );
-        commentResponse.content( comment.getContent() );
-        commentResponse.createdAt( comment.getCreatedAt() );
-        commentResponse.updatedAt( comment.getUpdatedAt() );
-        commentResponse.postId( comment.getPostId() );
-
-        return commentResponse.build();
+        return comment;
     }
 }

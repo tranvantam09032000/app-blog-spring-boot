@@ -1,13 +1,19 @@
 
 —
-java:S1192+"ODefine a constant instead of duplicating this literal "Post not found" 3 times.(½äÌûÿÿÿÿ8âéò»2J$192a62b0-51bf-4b2c-8afc-5a35b791a0d1
+java:S1192-"ODefine a constant instead of duplicating this literal "Post not found" 3 times.(½äÌûÿÿÿÿ8ÕÙï²‚2J$68e631d7-486c-47b6-a468-9326497103ca
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ãéò»2J$2ccb794f-fe1e-4ad1-be8e-567ae8ac9ef2
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$d6d110bd-e3d5-47df-a10a-0092ce7e061a
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ãéò»2J$e5ca52d0-2ce6-49ce-aaea-1286f074ed95
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$52cdcf3e-d73f-492d-a9c2-4c57505ea5a0
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ãéò»2J$14dc962d-215b-491e-8304-340f97529013
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$249d0849-cd60-4fe4-9d86-155ed851cede
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ãéò»2J$fff8d223-dfef-48a3-a554-bd5f04839473
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$2488d124-ca48-4bf7-be5c-e6a42377f80e
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ãéò»2J$c3e7c55d-ada2-458e-b5ea-066e8e0cbb94
+java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$a30a832c-8308-4d13-bcb2-34578cc8ced1
+…
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$3d7b3355-0e14-45a7-9a82-bd9689fefa63
+„
+java:S1854-"<Remove this useless assignment to local variable "postById".(½äÌûÿÿÿÿ8×Ùï²‚2J$e228fb71-b2a1-4ab9-a8bc-882595f13fac
+u
+java:S1481-"-Remove this unused "postById" local variable.(½äÌûÿÿÿÿ8ØÙï²‚2J$d793b496-b7f2-4114-af12-28f230f9b325

@@ -8,7 +8,7 @@ export interface IPost {
   id: number
   title: string
   subTitle: string
-  content: string
+  contents: IContent[]
   thumbnail: string
   createdAt: string
   updatedAt: string
@@ -18,11 +18,19 @@ export interface IPost {
   category: ICategory
 }
 
+export interface IContent {
+  id: number
+  type: string
+  value: string | string[]
+  position: number
+  postId: number
+}
+
 export interface IFormPost {
   id: number
   title: string
   subTitle: string
-  content: string
+  contents: IContent[]
   thumbnail: string
   createdAt: string
   updatedAt: string
@@ -56,6 +64,7 @@ export interface IFilterPost {
   size: number;
   categoryId: string;
 }
+
 export interface ICategory {
   id: number;
   title: string;

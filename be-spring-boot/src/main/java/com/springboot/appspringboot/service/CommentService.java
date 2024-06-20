@@ -1,6 +1,6 @@
 package com.springboot.appspringboot.service;
 
-import com.springboot.appspringboot.dto.request.CommentCreateRequest;
+import com.springboot.appspringboot.dto.request.CommentRequestDTO;
 import com.springboot.appspringboot.dto.request.CommentUpdateRequest;
 import com.springboot.appspringboot.entity.Comment;
 import com.springboot.appspringboot.entity.Post;
@@ -19,6 +19,8 @@ public class CommentService {
     private CommentRepository commentRepository;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private CommentMapper commentMapper;
 
     public List<Comment> getCommentByPost(Integer postId) {
         return postId == null ?
@@ -26,33 +28,15 @@ public class CommentService {
                 commentRepository.findCommentsByPost_Id(postId, Sort.by("id"));
     }
 
-    public Integer createComment(CommentCreateRequest request) {
-        Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> new RuntimeException("Post not found"));
-        Comment comment = Comment.builder()
-                .fullName(request.getFullName())
-                .content(request.getContent())
-                .createdAt(new Date())
-                .updatedAt(new Date())
-                .post(post)
-                .build();
-
+    public Integer createComment(CommentRequestDTO request) {
+        Comment comment = commentMapper.commentRequestToComment(request, postRepository);
         commentRepository.save(comment);
         return comment.getId();
     }
 
-    public Integer updateComment(Integer id, CommentUpdateRequest request) {
+    public Integer updateComment(Integer id, CommentRequestDTO request) {
         Comment commentById = commentRepository.findById(id).orElseThrow(() -> new RuntimeException("Comment not found"));
-
-        Post post = postRepository.getReferenceById(request.getPostId());
-
-        Comment comment = Comment.builder()
-                .id(id)
-                .fullName(request.getFullName())
-                .content(request.getContent())
-                .updatedAt(new Date())
-                .createdAt(commentById.getCreatedAt())
-                .post(post)
-                .build();
+        Comment comment = commentMapper.commentRequestToComment(request, postRepository);
         commentRepository.save(comment);
         return comment.getId();
     }
