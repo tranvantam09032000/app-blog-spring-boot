@@ -36,9 +36,13 @@
                     <div class="flex align-items-center justify-content-between gap-5">
                       <div class="flex align-items-center gap-2">
                         <label>Content Type:</label>
-                        <p-dropdown formControlName="type" (onChange)="changeType($event.value, index)"
-                                    [options]="contentTypes" [style]="{'min-width': '200px'}" optionLabel="name"
-                                    optionValue="value" placeholder="Select content type"/>
+                        <p-dropdown
+                          [ngClass]="{'ng-dirty ng-invalid': submit && !contents.controls[i].value.type}"
+                          (onChange)="changeType($event.value, index)"
+                          [options]="contentTypes" [style]="{'min-width': '200px'}"
+                          formControlName="type"
+                          optionLabel="name"
+                          optionValue="value" placeholder="Select content type"/>
                       </div>
                       @if (i !== 0) {
                         <p-button label="Delete" severity="danger" (onClick)="deleteContent(i)"/>
@@ -48,13 +52,17 @@
                   <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
                     @if (content.get('type')?.value === "image") {
                       <div class="flex flex-column image">
-                        <input formControlName="value" pInputText id="username" class="w-full"
-                               placeholder="Enter image"/>
+                        <input
+                          [ngClass]="{'ng-dirty ng-invalid': submit && !content.get('value')?.value}"
+                          formControlName="value" pInputText id="username" class="w-full"
+                          placeholder="Enter image"/>
                       </div>
                     }
                     @if (content.get('type')?.value === "text") {
                       <div class="flex flex-column text">
-                        <p-editor formControlName="value" class="w-full">
+                        <p-editor
+                          [ngClass]="{'ng-dirty ng-invalid': submit && !content.get('value')?.value}"
+                          formControlName="value" class="w-full">
                           <ng-template pTemplate="header">
                                       <span class="ql-formats">
                                         <select title="Font Size" class="ql-size">
@@ -76,9 +84,11 @@
                         <div class="">
                           @for (item of content.get('value')?.value; track item; let itemIndex = $index) {
                             <div class="flex align-content-center gap-2 mt-3">
-                              <input (focusout)="updateValueSlider(i, itemIndex, $event)"
-                                     [value]="this.contents.controls[index].get('value')?.value[itemIndex]" pInputText
-                                     class="w-full" placeholder="Enter image"/>
+                              <input
+                                [ngClass]="{'ng-dirty ng-invalid': submit && !content.get('value')?.value[itemIndex]}"
+                                (focusout)="updateValueSlider(i, itemIndex, $event)"
+                                [value]="this.contents.controls[index].get('value')?.value[itemIndex]" pInputText
+                                class="w-full" placeholder="Enter image"/>
                               <p-button (onClick)="removeImageSlider(i, itemIndex)" label="Delete" severity="danger"/>
                             </div>
                           }
