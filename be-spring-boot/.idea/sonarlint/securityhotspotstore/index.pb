@@ -78,8 +78,6 @@ Q.idea/sonarlint/securityhotspotstore/8/b/8bf9a0c76cee89021a19081a2d70237db7e2fd
 z
 Jsrc/main/java/com/springboot/appspringboot/dto/request/PostRequestDTO.java,5/3/5317a29e953cc5caa9017d054e4327e859c44196
 Å
-Q.idea/sonarlint/securityhotspotstore/d/f/df0fbb6e727134e381d42b25716741e9fe297c40,9/6/9648025240b1e1774269c915f9d2f37882ad484f
-Å
 Q.idea/sonarlint/securityhotspotstore/5/3/5317a29e953cc5caa9017d054e4327e859c44196,0/2/02a783841372ef5e94f29ac482ac2cba46b0edd2
 w
 G.idea/sonarlint/issuestore/5/3/5317a29e953cc5caa9017d054e4327e859c44196,c/1/c12e56178729a4beb54908030ade1ccb6dc15424
@@ -89,11 +87,6 @@ Lsrc/main/java/com/springboot/appspringboot/dto/response/PostResponseDTO.java,2
 Msrc/main/java/com/springboot/appspringboot/dto/request/CommentRequestDTO.java,6/a/6ab3f8f8ce1fd528721914433ea853f4a48e9a4a
 {
 Ksrc/main/java/com/springboot/appspringboot/abstracts/AuditableAbstract.java,b/2/b2c630ac2add811dd233ec514558926bbc55c8b9
-:
-
-Dockerfile,6/6/6651ddff6eb82c840ced7c1dddee15c6e1913dd4
-r
-Bsrc/main/java/com/springboot/appspringboot/entity/ContentPost.java,3/6/36083b654304a309db7ae1a458a04520dc867481
 r
 Bsrc/main/java/com/springboot/appspringboot/entity/PostContent.java,6/4/646af622964e6ae45d8e55906129ec84f78c562f
 Ä

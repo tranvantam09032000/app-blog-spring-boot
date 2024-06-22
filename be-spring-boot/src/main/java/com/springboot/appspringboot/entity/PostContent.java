@@ -2,6 +2,7 @@ package com.springboot.appspringboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +34,7 @@ public class PostContent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     String type;
+    @Column(name="value",columnDefinition="LONGTEXT")
     String value;
     Integer position;
     @ManyToOne

@@ -2,9 +2,9 @@ import {Component, Input} from '@angular/core';
 import {CardModule} from "primeng/card";
 import {ImageModule} from "primeng/image";
 import {PrimeTemplate} from "primeng/api";
-import {IPost} from "../../models.model";
 import {RouterLink} from "@angular/router";
 import {DatePipe} from "@angular/common";
+import {IPost} from "../../models/product.model";
 
 @Component({
   selector: 'app-card-post',

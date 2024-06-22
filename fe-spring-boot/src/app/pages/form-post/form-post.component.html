@@ -1,5 +1,5 @@
 <div class="p-5">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form">
     <div class="flex flex-column gap-2 mt-3">
       <label for="title">Title</label>
       <input
@@ -57,6 +57,12 @@
                         <p-editor formControlName="value" class="w-full">
                           <ng-template pTemplate="header">
                                       <span class="ql-formats">
+                                        <select title="Font Size" class="ql-size">
+                                           <option value="small">small</option>
+                                           <option value="normal">normal</option>
+                                           <option value="large">large</option>
+                                           <option value="huge">huge</option>
+                                        </select>
                                           <button type="button" class="ql-bold" aria-label="Bold"></button>
                                           <button type="button" class="ql-italic" aria-label="Italic"></button>
                                           <button type="button" class="ql-underline" aria-label="Underline"></button>

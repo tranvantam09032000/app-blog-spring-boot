@@ -3,22 +3,21 @@ import {Button} from "primeng/button";
 import {MenubarModule} from "primeng/menubar";
 import {MenuItem, PrimeTemplate} from "primeng/api";
 import {Subject, takeUntil} from "rxjs";
-import {ICategory} from "../../models.model";
-import {ServicesService} from "../../services.service";
 import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
+import {CategoryService} from "../../services/category.service";
 
 @Component({
   selector: 'app-menu-bar',
   standalone: true,
-    imports: [
-        Button,
-        MenubarModule,
-        PrimeTemplate
-    ],
+  imports: [
+    Button,
+    MenubarModule,
+    PrimeTemplate
+  ],
   templateUrl: './menu-bar.component.html',
   styleUrl: './menu-bar.component.scss'
 })
-export class MenuBarComponent implements OnInit, OnDestroy{
+export class MenuBarComponent implements OnInit, OnDestroy {
   items: MenuItem[] = [
     {
       label: 'Home',
@@ -31,12 +30,14 @@ export class MenuBarComponent implements OnInit, OnDestroy{
   isButtonUpdate: boolean = false;
   id: string = "";
   destroy$ = new Subject();
-  constructor(private router : Router,private route: ActivatedRoute,private servicesService:ServicesService) {
+
+  constructor(private router: Router, private route: ActivatedRoute, private categoryService: CategoryService) {
 
   }
+
   ngOnInit() {
     this.router.events.subscribe((event: any) => {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       if (event instanceof NavigationStart) {
         this.id = event.url.split("/").pop() || "";
         this.isButtonCreate = !event.url.includes('/post/create');
@@ -46,12 +47,13 @@ export class MenuBarComponent implements OnInit, OnDestroy{
 
     this.getCategories();
   }
+
   getCategories() {
-    this.servicesService.getCategories().pipe(takeUntil(this.destroy$)).subscribe((values)=> {
+    this.categoryService.getCategories().pipe(takeUntil(this.destroy$)).subscribe((values) => {
       const data = {
         label: 'Categories',
         icon: 'pi pi-star',
-        items: values.map((item: ICategory)=> ({
+        items: values.map((item) => ({
           label: item.title, id: item.id.toString(),
           routerLink: `/posts-by-category/${item.id}`,
         }))
@@ -60,6 +62,7 @@ export class MenuBarComponent implements OnInit, OnDestroy{
       this.isShowMenu = true;
     })
   }
+
   ngOnDestroy() {
     this.destroy$.next(null);
   }

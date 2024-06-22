@@ -1,10 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subject, combineLatest, takeUntil} from "rxjs";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {ServicesService} from "../../services.service";
 import {MessageService} from "primeng/api";
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {IAuthor, ICategory, IContent, IFormPost, IPost, ITag} from "../../models.model";
 import {} from "rxjs/internal/operators/combineLatest";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
@@ -17,6 +15,14 @@ import {StepperModule} from "primeng/stepper";
 import {AvatarModule} from "primeng/avatar";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {GalleriaModule} from "primeng/galleria";
+import {IAuthor} from "../../models/author.model";
+import {ICategory} from "../../models/category.model";
+import {ITag} from "../../models/tag.model";
+import {PostService} from "../../services/post.service";
+import {AuthorService} from "../../services/author.service";
+import {CategoryService} from "../../services/category.service";
+import {TagService} from "../../services/tag.service";
+import {IContent, IFormPost} from "../../models/product.model";
 
 @Component({
   selector: 'app-form-post',
@@ -67,7 +73,11 @@ export class FormPostComponent implements OnInit, OnDestroy {
   activeStep: number = -1;
   destroy$ = new Subject();
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private servicesService: ServicesService,
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+              private postService: PostService,
+              private authorService: AuthorService,
+              private categoryService: CategoryService,
+              private tagService: TagService,
               private router: Router, private messageService: MessageService) {
   }
 
@@ -83,9 +93,9 @@ export class FormPostComponent implements OnInit, OnDestroy {
       }
     });
     combineLatest(
-      this.servicesService.getAuthors(),
-      this.servicesService.getTags(),
-      this.servicesService.getCategories()
+      this.authorService.getAuthors(),
+      this.tagService.getTags(),
+      this.categoryService.getCategories()
     ).pipe(takeUntil(this.destroy$)).subscribe(
       ([authors, tags, categories]) => {
         this.authors = authors;
@@ -104,9 +114,11 @@ export class FormPostComponent implements OnInit, OnDestroy {
   }
 
   setContents(values: IContent[], id: number) {
-    values.forEach((item) => {
+    values.sort((a, b) => a.position - b.position).forEach((item) => {
       if (item.type === "slider") {
-        const content = {...item, value: item.value.toString().split(','), postId: Number(id)};
+        const value = JSON.parse(item.value.toString().replace(/'/g, '"'));
+        const content = {...item, value: value, postId: Number(id)};
+
         this.addContent(content);
       } else {
         const content = {...item, postId: Number(id)};
@@ -121,7 +133,7 @@ export class FormPostComponent implements OnInit, OnDestroy {
       id: [value?.id || ''],
       type: [value?.type || '', Validators.required],
       value: [value?.value || '', Validators.required],
-      position: [value?.position || '', Validators.required],
+      position: [value?.position || this.contents.controls.length + 1, Validators.required],
       postId: [value?.postId || '']
     });
     this.contents.push(content);
@@ -164,7 +176,7 @@ export class FormPostComponent implements OnInit, OnDestroy {
   }
 
   getPostById(id: string) {
-    this.servicesService.getPostById(id).pipe(takeUntil(this.destroy$)).subscribe(
+    this.postService.getPostById(id).pipe(takeUntil(this.destroy$)).subscribe(
       {
         next: (value) => {
           this.form.controls["id"].setValue(value.id);
@@ -174,7 +186,7 @@ export class FormPostComponent implements OnInit, OnDestroy {
           this.form.controls["published"].setValue(value.published);
           this.form.controls["authorId"].setValue(value.author.id);
           this.form.controls["categoryId"].setValue(value.category.id);
-          this.form.controls["tags"].setValue(value.tags.map(item => item.id));
+          this.form.controls["tags"].setValue(value.tags.map((item: ITag) => item.id));
           this.setContents(value.contents, value.id)
         },
         error: (error) => {
@@ -192,7 +204,7 @@ export class FormPostComponent implements OnInit, OnDestroy {
     const body = this.form.value;
     body.contents = body.contents.map((item: any) => {
       if (item.type === "slider") {
-        return {...item, value: item.value.toString()}
+        return {...item, value: JSON.stringify(item.value)}
       } else {
         return item;
       }
@@ -204,14 +216,14 @@ export class FormPostComponent implements OnInit, OnDestroy {
   }
 
   createPost(body: IFormPost) {
-    this.servicesService.createPost(body).pipe(takeUntil(this.destroy$)).subscribe((id) => {
+    this.postService.createPost(body).pipe(takeUntil(this.destroy$)).subscribe((id) => {
       this.messageService.add({severity: 'success', summary: 'Success', detail: 'Create post success!'});
       this.router.navigateByUrl(`/post/view/${id}`);
     })
   }
 
   updatePost(body: IFormPost) {
-    this.servicesService.updatePost(body).pipe(takeUntil(this.destroy$)).subscribe((id) => {
+    this.postService.updatePost(body).pipe(takeUntil(this.destroy$)).subscribe((id) => {
       this.messageService.add({severity: 'success', summary: 'Success', detail: 'Update post success!'});
       this.router.navigateByUrl(`/post/view/${id}`);
     })
