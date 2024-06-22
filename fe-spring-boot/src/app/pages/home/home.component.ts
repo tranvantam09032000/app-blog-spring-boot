@@ -4,7 +4,7 @@ import {CardModule} from "primeng/card";
 import {DataViewModule} from "primeng/dataview";
 import {MenubarModule} from "primeng/menubar";
 import {DatePipe, NgClass, NgForOf} from "@angular/common";
-import {map, Observable, Subject, takeUntil} from "rxjs";
+import {map, forkJoin, Observable, Subject, takeUntil, switchAll, mergeMap, from} from "rxjs";
 import {ImageModule} from "primeng/image";
 import {CardPostComponent} from "../../components/card-post/card-post.component";
 import {ICategory} from "../../models/category.model";
@@ -12,6 +12,7 @@ import {IFilterPost, IPost} from "../../models/product.model";
 import {PrimeTemplate} from "primeng/api";
 import {PostService} from "../../services/post.service";
 import {CategoryService} from "../../services/category.service";
+import {combineLatest} from "rxjs/internal/operators/combineLatest";
 
 type IPostByCategory = {
   category: ICategory,
@@ -65,24 +66,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   getCategories() {
     this.postsByCategory = [];
     this.categoryService.getCategories().pipe(
-      takeUntil(this.destroy$)
-    ).subscribe((values) => {
-      values.forEach(item => {
-        this.getPostByCategory(item)
-      })
+      takeUntil(this.destroy$),
+      mergeMap(categories => from(categories)),
+      mergeMap(category => this.postService.getPosts({page: 1, size: 4, categoryId: category.id.toString()})
+        .pipe(map((posts) => {
+          return {category: category, posts: posts}
+        })))
+    ).subscribe((value) => {
+      this.postsByCategory.push(value)
     })
-  }
-
-  getPostByCategory(category: ICategory): Observable<IPostByCategory> {
-    return this.postService.getPosts({page: 1, size: 4, categoryId: category.id.toString()}).pipe(
-      map((values) => {
-        return {
-          category: category,
-          posts: values
-        }
-      }),
-      takeUntil(this.destroy$)
-    )
   }
 
   ngOnDestroy() {

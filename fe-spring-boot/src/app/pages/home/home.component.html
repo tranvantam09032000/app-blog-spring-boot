@@ -9,11 +9,12 @@
         <ng-template pTemplate="list" let-post>
           <div class="grid grid-nogutter">
             <div class="col-12" *ngFor="let item of post5TopNew; let first = first" class="col-12">
-              <div [routerLink]="'/post/view/' + item?.id" class="py-3 cursor-pointer" [ngClass]="{ 'border-top-1 surface-border': !first }">
-                <div>{{item.title}}</div>
+              <div [routerLink]="'/post/view/' + item?.id" class="py-3 cursor-pointer"
+                   [ngClass]="{ 'border-top-1 surface-border': !first }">
+                <div>{{ item.title }}</div>
                 <div class="flex align-items-center justify-content-between mt-3">
-                  <span class="text-sm text-500">{{item.author.firstName}} {{item.author.lastName}}</span>
-                  <span class="text-sm text-500">{{item.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
+                  <span class="text-sm text-500">{{ item.author.firstName }} {{ item.author.lastName }}</span>
+                  <span class="text-sm text-500">{{ item.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
                 </div>
               </div>
             </div>
@@ -23,7 +24,7 @@
     </div>
   </div>
   <div class="grid mt-3">
-    @for (post of post4TopNew; track post){
+    @for (post of post4TopNew; track post) {
       <div class="col-12 md:col-3 px-5">
         <app-card-post [value]="post" [heightImage]="'200'"></app-card-post>
       </div>
@@ -32,27 +33,37 @@
 
   @for (item of postsByCategory; track item) {
     <div class="flex align-items-end justify-content-between px-5 mt-8">
-      <span class="font-bold text-lg">{{item.category.title}}</span>
+      <span class="font-bold text-lg">{{ item.category.title }}</span>
       <span [style.width.%]="80" class="border-2 border-orange-500"></span>
       <span [routerLink]="'/posts-by-category/'+ item.category.id" class="text-blue-400 cursor-pointer">See more</span>
     </div>
     <div class="grid mt-3 px-5">
-      @for (post of item.posts; track post){
-        <div [routerLink]="'/post/view/' + post?.id" class="col-12 md:col-6 cursor-pointer">
-          <p-card class="p-0">
-            <div>
-              <div [style.width.%]="90" class="mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">{{post?.title}}</div>
-              <div [style.width.%]="90" class="white-space-nowrap overflow-hidden text-overflow-ellipsis">{{post?.subTitle}}</div>
-            </div>
-            <ng-template pTemplate="footer">
-              <div class="flex gap-3">
-                <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{post?.author?.firstName}} {{post?.author?.lastName}}</span>
-                <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{post?.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
+      @if (item.posts.length) {
+        @for (post of item.posts; track post) {
+          <div [routerLink]="'/post/view/' + post?.id" class="col-12 md:col-6 cursor-pointer">
+            <p-card class="p-0">
+              <div>
+                <div [style.width.%]="90"
+                     class="mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ post?.title }}
+                </div>
+                <div [style.width.%]="90"
+                     class="white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ post?.subTitle }}
+                </div>
               </div>
-            </ng-template>
-          </p-card>
+              <ng-template pTemplate="footer">
+                <div class="flex gap-3">
+                  <span
+                    class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ post?.author?.firstName }} {{ post?.author?.lastName }}</span>
+                  <span
+                    class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ post?.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
+                </div>
+              </ng-template>
+            </p-card>
 
-        </div>
+          </div>
+        }
+      } @else {
+        <div class="text-center text-400 w-full text-xl">No Data</div>
       }
     </div>
   }
