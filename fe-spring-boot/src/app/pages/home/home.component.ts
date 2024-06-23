@@ -4,7 +4,7 @@ import {CardModule} from "primeng/card";
 import {DataViewModule} from "primeng/dataview";
 import {MenubarModule} from "primeng/menubar";
 import {DatePipe, NgClass, NgForOf} from "@angular/common";
-import {map, forkJoin, Observable, Subject, takeUntil, switchAll, mergeMap, from} from "rxjs";
+import {map, Subject, takeUntil, mergeMap, from} from "rxjs";
 import {ImageModule} from "primeng/image";
 import {CardPostComponent} from "../../components/card-post/card-post.component";
 import {ICategory} from "../../models/category.model";
@@ -12,7 +12,6 @@ import {IFilterPost, IPost} from "../../models/product.model";
 import {PrimeTemplate} from "primeng/api";
 import {PostService} from "../../services/post.service";
 import {CategoryService} from "../../services/category.service";
-import {combineLatest} from "rxjs/internal/operators/combineLatest";
 
 type IPostByCategory = {
   category: ICategory,

@@ -3,7 +3,6 @@ import {Subject, combineLatest, takeUntil} from "rxjs";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {} from "rxjs/internal/operators/combineLatest";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {MultiSelectModule} from "primeng/multiselect";
@@ -133,7 +132,7 @@ export class FormPostComponent implements OnInit, OnDestroy {
       id: [value?.id || ''],
       type: [value?.type || '', Validators.required],
       value: [value?.value || '', Validators.required],
-      position: [value?.position || this.contents.controls.length + 1, Validators.required],
+      position: [value?.position || 0, Validators.required],
       postId: [value?.postId || '']
     });
     this.contents.push(content);
@@ -202,11 +201,11 @@ export class FormPostComponent implements OnInit, OnDestroy {
     this.submit = true;
     if (this.form.invalid) return;
     const body = this.form.value;
-    body.contents = body.contents.map((item: any) => {
+    body.contents = body.contents.map((item: IContent, index: number) => {
       if (item.type === "slider") {
-        return {...item, value: JSON.stringify(item.value)}
+        return {...item, value: JSON.stringify(item.value), position: index}
       } else {
-        return item;
+        return {...item, position: index};
       }
     })
     body.authorId = Number(body.authorId);
