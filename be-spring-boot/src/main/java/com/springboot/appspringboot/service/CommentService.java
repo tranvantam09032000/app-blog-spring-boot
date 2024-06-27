@@ -10,6 +10,7 @@ import com.springboot.appspringboot.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
 
@@ -29,14 +30,16 @@ public class CommentService {
     }
 
     public Integer createComment(CommentRequestDTO request) {
-        Comment comment = commentMapper.commentRequestToComment(request, postRepository);
+        Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> new RuntimeException("Post not found"));
+        Comment comment = commentMapper.commentRequestToComment(request, post);
         commentRepository.save(comment);
         return comment.getId();
     }
 
     public Integer updateComment(Integer id, CommentRequestDTO request) {
+        Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> new RuntimeException("Post not found"));
         Comment commentById = commentRepository.findById(id).orElseThrow(() -> new RuntimeException("Comment not found"));
-        Comment comment = commentMapper.commentRequestToComment(request, postRepository);
+        Comment comment = commentMapper.commentRequestToComment(request, post);
         commentRepository.save(comment);
         return comment.getId();
     }

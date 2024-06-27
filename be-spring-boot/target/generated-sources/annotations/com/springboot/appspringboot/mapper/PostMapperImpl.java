@@ -2,13 +2,11 @@ package com.springboot.appspringboot.mapper;
 
 import com.springboot.appspringboot.dto.request.PostRequestDTO;
 import com.springboot.appspringboot.dto.response.PostResponseDTO;
+import com.springboot.appspringboot.entity.Author;
+import com.springboot.appspringboot.entity.Category;
 import com.springboot.appspringboot.entity.Post;
 import com.springboot.appspringboot.entity.PostContent;
 import com.springboot.appspringboot.entity.Tag;
-import com.springboot.appspringboot.repository.AuthorRepository;
-import com.springboot.appspringboot.repository.CategoryRepository;
-import com.springboot.appspringboot.repository.PostContentRepository;
-import com.springboot.appspringboot.repository.TagRepository;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -23,23 +21,31 @@ import org.springframework.stereotype.Component;
 public class PostMapperImpl implements PostMapper {
 
     @Override
-    public Post postRequestToPost(PostRequestDTO postRequestDTO, AuthorRepository authorRepository, CategoryRepository categoryRepository, TagRepository tagRepository, PostContentRepository postContentRepository) {
-        if ( postRequestDTO == null ) {
+    public Post postRequestToPost(PostRequestDTO postRequestDTO, Author author, Category category, Set<Tag> tags) {
+        if ( postRequestDTO == null && author == null && category == null && tags == null ) {
             return null;
         }
 
         Post post = new Post();
 
-        post.setCreatedAt( postRequestDTO.getCreatedAt() );
-        post.setUpdatedAt( postRequestDTO.getUpdatedAt() );
-        post.setId( postRequestDTO.getId() );
-        post.setTitle( postRequestDTO.getTitle() );
-        post.setSubTitle( postRequestDTO.getSubTitle() );
-        post.setThumbnail( postRequestDTO.getThumbnail() );
-        post.setPublished( postRequestDTO.getPublished() );
-        post.setContents( postContentArrayToPostContentSet( postRequestDTO.getContents(), authorRepository, categoryRepository, tagRepository, postContentRepository ) );
+        if ( postRequestDTO != null ) {
+            post.setId( postRequestDTO.getId() );
+            post.setTitle( postRequestDTO.getTitle() );
+            post.setCreatedAt( postRequestDTO.getCreatedAt() );
+            post.setUpdatedAt( postRequestDTO.getUpdatedAt() );
+            post.setSubTitle( postRequestDTO.getSubTitle() );
+            post.setThumbnail( postRequestDTO.getThumbnail() );
+            post.setPublished( postRequestDTO.getPublished() );
+            post.setContents( postContentArrayToPostContentSet( postRequestDTO.getContents() ) );
+        }
+        post.setAuthor( author );
+        post.setCategory( category );
+        Set<Tag> set = tags;
+        if ( set != null ) {
+            post.setTags( new LinkedHashSet<Tag>( set ) );
+        }
 
-        setPost( postRequestDTO, post, authorRepository, categoryRepository, tagRepository, postContentRepository );
+        setPost( postRequestDTO, post );
 
         return post;
     }
@@ -73,7 +79,7 @@ public class PostMapperImpl implements PostMapper {
         return postResponseDTO;
     }
 
-    protected Set<PostContent> postContentArrayToPostContentSet(PostContent[] postContentArray, AuthorRepository authorRepository, CategoryRepository categoryRepository, TagRepository tagRepository, PostContentRepository postContentRepository) {
+    protected Set<PostContent> postContentArrayToPostContentSet(PostContent[] postContentArray) {
         if ( postContentArray == null ) {
             return null;
         }

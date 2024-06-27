@@ -25,11 +25,9 @@ import java.util.Set;
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
 public interface CommentMapper {
 
-    @Mapping(target = "post", ignore = true)
-   Comment commentRequestToComment(CommentRequestDTO commentRequestDTO, @Context PostRepository postRepository);
-    @AfterMapping
-    default void setPost(CommentRequestDTO commentRequestDTO, @MappingTarget Comment comment, @Context PostRepository postRepository) {
-        Post post = postRepository.findById(commentRequestDTO.getPostId()).orElseThrow(() -> new RuntimeException("Post not found"));
-        comment.setPost(post);
-    }
+    @Mapping(target = "post", source = "post")
+    @Mapping(target = "createdAt", source = "commentRequestDTO.createdAt")
+    @Mapping(target = "updatedAt", source = "commentRequestDTO.updatedAt")
+    @Mapping(target = "id", source = "commentRequestDTO.id")
+    Comment commentRequestToComment(CommentRequestDTO commentRequestDTO, Post post);
 }

@@ -17,7 +17,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,14 +38,24 @@ public class PostService {
     private PostContentRepository postContentRepository;
 
     public Integer createPost(PostRequestDTO request) {
-        Post post = postMapper.postRequestToPost(request, authorRepository, categoryRepository, tagRepository, postContentRepository);
+        Author author = authorRepository.getReferenceById(request.getAuthorId());
+        Category category = categoryRepository.getReferenceById(request.getCategoryId());
+        List<Tag> listTag = tagRepository.findAllById(List.of(request.getTags()));
+        Set<Tag> tags = new HashSet<>(listTag);
+
+        Post post = postMapper.postRequestToPost(request, author, category, tags);
         Post postResponse = postRepository.save(post);
         return postResponse.getId();
     }
 
     public Integer updatePost(Integer id, PostRequestDTO request) {
         Post postById = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
-        Post post = postMapper.postRequestToPost(request, authorRepository, categoryRepository, tagRepository, postContentRepository);
+        Author author = authorRepository.getReferenceById(request.getAuthorId());
+        Category category = categoryRepository.getReferenceById(request.getCategoryId());
+        List<Tag> listTag = tagRepository.findAllById(List.of(request.getTags()));
+        Set<Tag> tags = new HashSet<>(listTag);
+
+        Post post = postMapper.postRequestToPost(request, author, category, tags);
         postRepository.save(post);
         return post.getId();
     }
@@ -58,7 +70,7 @@ public class PostService {
         Page<Post> listPost = categoryId == null ?
                 postRepository.findPostsByPublished(true, pageable) :
                 postRepository.findPostsByCategory_IdAndPublished(Integer.parseInt(categoryId), true, pageable);
-        return listPost.getContent().stream().map(post-> postMapper.postToPostResponseDTO(post)).toArray(PostResponseDTO[]::new);
+        return listPost.getContent().stream().map(post -> postMapper.postToPostResponseDTO(post)).toArray(PostResponseDTO[]::new);
     }
 
     public void deletePost(Integer id) {
