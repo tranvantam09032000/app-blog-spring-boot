@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subject, takeUntil} from "rxjs";
+import {map, Observable, Subject, takeUntil} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {MessageService, PrimeTemplate} from "primeng/api";
 import {DataViewModule} from "primeng/dataview";
 import {ImageModule} from "primeng/image";
-import {NgClass, NgForOf} from "@angular/common";
-import {format} from "date-fns";
+import {AsyncPipe, DatePipe, NgClass, NgForOf} from "@angular/common";
 import {Button} from "primeng/button";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {DialogModule} from "primeng/dialog";
@@ -29,12 +28,15 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     ReactiveFormsModule,
     ChipsModule,
     CardModule,
-    InputTextareaModule
+    InputTextareaModule,
+    AsyncPipe,
+    DatePipe
   ],
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.scss'
 })
 export class CommentsComponent implements OnInit, OnDestroy {
+  commentsObs$: Observable<any> = new Observable();
   postId: string = "";
   visibleForm: boolean = false;
   comments: IComment[] = []
@@ -61,16 +63,9 @@ export class CommentsComponent implements OnInit, OnDestroy {
       const id = params.get('id') || '';
       if (id) {
         this.postId = id;
-        this.getCommentsByPost(this.postId);
+        this.fetchCommentsByPost(this.postId);
       }
     });
-  }
-
-  getCommentsByPost(id: string) {
-    this.commentService.getCommentsByPost(id).pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      this.comments = value.map(item =>
-        ({...item, createdAt: format(new Date(item.createdAt), "yyyy/MM/dd HH:mm")}))
-    })
   }
 
   openForm(comment?: IComment) {
@@ -93,23 +88,36 @@ export class CommentsComponent implements OnInit, OnDestroy {
     if (this.form.invalid) return;
     const body = this.form.value;
     body.postId = Number(this.postId);
-    body.id ? this.updateComment(body) : this.createComment(body);
+     body.id ? this.updateComment(body) : this.createComment(body);
+  }
+
+  fetchCommentsByPost(id: string) {
+    this.commentsObs$ = this.commentService.getCommentsByPost(id).pipe(
+      map((values)=> {
+        this.comments = values;
+        return values;
+      })
+    )
   }
 
   createComment(body: IFormComment) {
-    this.commentService.createComment(body).pipe(takeUntil(this.destroy$)).subscribe((id) => {
-      this.messageService.add({severity: 'success', summary: 'Success', detail: 'Create comment success!'});
-      this.getCommentsByPost(this.postId);
-      this.hiddenForm();
-    })
+    this.commentsObs$ = this.commentService.createComment(body).pipe(
+      map(()=> {
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Create comment success!'});
+        this.fetchCommentsByPost(this.postId);
+        this.hiddenForm();
+      })
+    )
   }
 
   updateComment(body: IFormComment) {
-    this.commentService.updateComment(body).pipe(takeUntil(this.destroy$)).subscribe((id) => {
-      this.messageService.add({severity: 'success', summary: 'Success', detail: 'Update comment success!'});
-      this.getCommentsByPost(this.postId);
-      this.hiddenForm();
-    })
+    this.commentsObs$ = this.commentService.updateComment(body).pipe(
+      map(()=> {
+        this.messageService.add({severity: 'success', summary: 'Success', detail: 'Update comment success!'});
+        this.fetchCommentsByPost(this.postId);
+        this.hiddenForm();
+      })
+    )
   }
 
   ngOnDestroy() {

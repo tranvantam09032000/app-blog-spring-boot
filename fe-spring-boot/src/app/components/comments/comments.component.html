@@ -32,7 +32,7 @@
       </form>
     </p-card>
   }
-  <p-dataView #dv class="mt-3" [value]="comments">
+  <p-dataView #dv class="mt-3" [value]="(commentsObs$ | async) || comments">
     <ng-template pTemplate="list" let-comment>
       <div class="grid grid-nogutter">
         <div class="col-12 grid mt-3 " [ngClass]="{ 'border-top-1 surface-border': !first }"
@@ -40,7 +40,7 @@
           <div class="col-12">
             <div class="grid mt-3">
               <span class="col-12 md:col-4 text-sm text-500 font-bold">{{ item.fullName }}</span>
-              <span class="col-12 md:col-4 text-sm text-500">{{ item.createdAt }}</span>
+              <span class="col-12 md:col-4 text-sm text-500">{{ item.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
               <span (click)="openForm(item)" class="col-12 md:col-4 pi pi-pencil cursor-pointer"
                     style="color: #2196f3"></span>
             </div>
@@ -51,3 +51,5 @@
     </ng-template>
   </p-dataView>
 </div>
+
+@if(commentsCreateObs$ | async){}
