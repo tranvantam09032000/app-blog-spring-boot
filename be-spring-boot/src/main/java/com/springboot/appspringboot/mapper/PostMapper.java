@@ -1,5 +1,4 @@
 package com.springboot.appspringboot.mapper;
-
 import com.springboot.appspringboot.dto.request.PostRequestDTO;
 import com.springboot.appspringboot.dto.response.PostResponseDTO;
 import com.springboot.appspringboot.entity.Author;
@@ -12,8 +11,6 @@ import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.factory.Mappers;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;

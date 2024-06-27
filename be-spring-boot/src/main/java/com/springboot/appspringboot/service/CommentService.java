@@ -1,7 +1,5 @@
 package com.springboot.appspringboot.service;
-
 import com.springboot.appspringboot.dto.request.CommentRequestDTO;
-import com.springboot.appspringboot.dto.request.CommentUpdateRequest;
 import com.springboot.appspringboot.entity.Comment;
 import com.springboot.appspringboot.entity.Post;
 import com.springboot.appspringboot.mapper.CommentMapper;
@@ -10,8 +8,6 @@ import com.springboot.appspringboot.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 import java.util.List;
 
 @Service

@@ -1,6 +1,5 @@
 package com.springboot.appspringboot.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.springboot.appspringboot.abstracts.AuditableAbstract;
 import jakarta.persistence.*;
 import lombok.*;

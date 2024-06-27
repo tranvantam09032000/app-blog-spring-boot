@@ -1,6 +1,5 @@
 package com.springboot.appspringboot.controller;
 import com.springboot.appspringboot.dto.request.CommentRequestDTO;
-import com.springboot.appspringboot.dto.request.CommentUpdateRequest;
 import com.springboot.appspringboot.entity.Comment;
 import com.springboot.appspringboot.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;

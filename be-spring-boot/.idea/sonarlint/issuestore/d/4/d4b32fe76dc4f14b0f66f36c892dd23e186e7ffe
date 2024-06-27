@@ -1,23 +1,19 @@
 
 —
-java:S11924"ODefine a constant instead of duplicating this literal "Post not found" 3 times.(½äÌûÿÿÿÿ8ÕÙï²‚2J$183c91f9-f2bc-4a71-bf9f-0f4c8b66318e
+java:S11921"ODefine a constant instead of duplicating this literal "Post not found" 3 times.(½äÌûÿÿÿÿ8ÕÙï²‚2J$81569f15-c740-4eee-b837-587969ffa245
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$3fa205ea-1908-48be-95e7-8c2aca64b95d
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$962aac4c-2069-40a6-9828-5cc0fdc6fefe
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$14f1047d-642e-4ba1-a9eb-fcc93cbc1e5e
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$cd1c5e12-a2bd-4191-a6dd-8530ca560eda
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$72d17a89-bc4e-403f-b9ca-e80c608c8ab0
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$275f80cb-485c-4d42-91f7-781ed6e39d70
 …
-java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$9becf550-88a9-443e-bc33-fcafc74674b5
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$6e342bbc-f835-4c58-828d-b402937c57ad
 …
-java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$fddbbb39-cf1d-4444-843f-6649d049f149
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$6a5e77f8-3206-4824-a414-9c07dc2dace7
 …
-java:S6813%"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$c94f2e11-a33e-4769-9fc3-a58e9841432e
+java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$39e0f9c8-2766-4a80-bdaf-eea5c0377be5
 „
-java:S18544"<Remove this useless assignment to local variable "postById".(½äÌûÿÿÿÿ8×Ùï²‚2J$d1420949-d7a8-4d8c-a84a-d59ce84a71b4
+java:S18541"<Remove this useless assignment to local variable "postById".(½äÌûÿÿÿÿ8èØêÒ…2J$46717ff8-df45-477c-8bf8-4f47f2dcbaae
 u
-java:S14814"-Remove this unused "postById" local variable.(½äÌûÿÿÿÿ8ØÙï²‚2J$5c6127dd-1ec6-4144-b120-c527fc2e3925
-u
-java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8öæáÒ…2J$fe77a906-219c-4b3c-a285-0b3ccfe59a09
-€
-java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8öæáÒ…2J$920dbf52-4500-4428-bf7b-d32af0893746
+java:S14811"-Remove this unused "postById" local variable.(½äÌûÿÿÿÿ8èØêÒ…2J$84334db7-1ed3-4ef9-9ad5-c8817d2cb146
