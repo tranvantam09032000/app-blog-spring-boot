@@ -34,5 +34,6 @@ public class Author {
     @JsonIgnore
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     Set<Post> posts;
-
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    Set<LikeOfPost> likeOfPosts;
 }

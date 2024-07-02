@@ -45,6 +45,9 @@ public class Post extends AuditableAbstract {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     Set<Comment> comments;
     @JsonIgnore
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    Set<LikeOfPost> likeOfPosts;
+    @JsonIgnore
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<PostContent> contents;
 }

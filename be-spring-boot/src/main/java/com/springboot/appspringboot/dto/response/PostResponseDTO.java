@@ -27,4 +27,5 @@ public class PostResponseDTO {
     List<PostContent> contents;
     Author author;
     Category category;
+    Integer[] authorsOfLike;
 }

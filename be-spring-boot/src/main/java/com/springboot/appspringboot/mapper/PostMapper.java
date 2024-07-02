@@ -35,6 +35,6 @@ public interface PostMapper {
         post.setContents(postContents);
     }
 
-    @Mapping(source = "contents", target = "contents")
-    PostResponseDTO postToPostResponseDTO(Post post);
+    @Mapping(source = "authorsOfLike", target = "authorsOfLike")
+    PostResponseDTO postToPostResponseDTO(Post post, Integer[] authorsOfLike);
 }
