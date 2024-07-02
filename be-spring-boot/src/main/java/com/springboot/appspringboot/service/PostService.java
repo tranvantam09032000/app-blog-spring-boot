@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -63,7 +64,7 @@ public class PostService {
     public PostResponseDTO getPostById(Integer id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         List<LikeOfPost> likesOfPost = this.likeOfPostRepository.findAllByPost_Id(id);
-        Integer[] authorsOfLike = likesOfPost.stream().map(item-> item.getAuthor().getId()).toArray(Integer[]::new);
+        Integer[] authorsOfLike = likesOfPost.stream().map(item -> item.getAuthor().getId()).toArray(Integer[]::new);
         return postMapper.postToPostResponseDTO(post, authorsOfLike);
     }
 
@@ -72,12 +73,11 @@ public class PostService {
         Page<Post> listPost = categoryId == null ?
                 postRepository.findPostsByPublished(true, pageable) :
                 postRepository.findPostsByCategory_IdAndPublished(Integer.parseInt(categoryId), true, pageable);
-        PostResponseDTO[] postResponseDTOS = listPost.getContent().stream().map(post -> {
+        return listPost.getContent().stream().map(post -> {
             List<LikeOfPost> likesOfPost = this.likeOfPostRepository.findAllByPost_Id(post.getId());
-            Integer[] authorsOfLike = likesOfPost.stream().map(item-> item.getAuthor().getId()).toArray(Integer[]::new);
+            Integer[] authorsOfLike = likesOfPost.stream().map(item -> item.getAuthor().getId()).toArray(Integer[]::new);
             return postMapper.postToPostResponseDTO(post, authorsOfLike);
         }).toArray(PostResponseDTO[]::new);
-        return postResponseDTOS;
     }
 
     public void deletePost(Integer id) {
@@ -88,10 +88,10 @@ public class PostService {
 
     public boolean likePost(LikePostRequestDTO request) {
         LikeOfPost likeOfPost = this.likeOfPostRepository.getByPostIdAndAuthorId(request.getPostId(), request.getAuthorId());
-        if(likeOfPost != null) {
+        if (likeOfPost != null) {
             this.likeOfPostRepository.deleteById(likeOfPost.getId());
             return false;
-        }else {
+        } else {
             Post post = postRepository.getReferenceById(request.getPostId());
             Author author = authorRepository.getReferenceById(request.getAuthorId());
             LikeOfPost likeOfPostRequest = likeOfPostMapper.likeOfPostRequestToLikeOfPost(request, post, author);
