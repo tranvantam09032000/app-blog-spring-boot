@@ -4,10 +4,12 @@ import com.springboot.appspringboot.dto.request.PostRequestDTO;
 import com.springboot.appspringboot.dto.response.PostResponseDTO;
 import com.springboot.appspringboot.entity.Author;
 import com.springboot.appspringboot.entity.Category;
+import com.springboot.appspringboot.entity.LikeOfPost;
 import com.springboot.appspringboot.entity.Post;
 import com.springboot.appspringboot.entity.PostContent;
 import com.springboot.appspringboot.entity.Tag;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.annotation.processing.Generated;
@@ -38,7 +40,13 @@ public class PostMapperImpl implements PostMapper {
             post.setPublished( postRequestDTO.getPublished() );
             post.setContents( postContentArrayToPostContentSet( postRequestDTO.getContents() ) );
         }
-        post.setAuthor( author );
+        if ( author != null ) {
+            post.setAuthor( author );
+            Set<LikeOfPost> set1 = author.getLikeOfPosts();
+            if ( set1 != null ) {
+                post.setLikeOfPosts( new LinkedHashSet<LikeOfPost>( set1 ) );
+            }
+        }
         post.setCategory( category );
         Set<Tag> set = tags;
         if ( set != null ) {
@@ -51,30 +59,36 @@ public class PostMapperImpl implements PostMapper {
     }
 
     @Override
-    public PostResponseDTO postToPostResponseDTO(Post post) {
-        if ( post == null ) {
+    public PostResponseDTO postToPostResponseDTO(Post post, Integer[] authorsOfLike) {
+        if ( post == null && authorsOfLike == null ) {
             return null;
         }
 
         PostResponseDTO postResponseDTO = new PostResponseDTO();
 
-        Set<PostContent> set = post.getContents();
-        if ( set != null ) {
-            postResponseDTO.setContents( new ArrayList<PostContent>( set ) );
+        if ( post != null ) {
+            postResponseDTO.setId( post.getId() );
+            postResponseDTO.setTitle( post.getTitle() );
+            postResponseDTO.setSubTitle( post.getSubTitle() );
+            postResponseDTO.setThumbnail( post.getThumbnail() );
+            postResponseDTO.setCreatedAt( post.getCreatedAt() );
+            postResponseDTO.setUpdatedAt( post.getUpdatedAt() );
+            postResponseDTO.setPublished( post.getPublished() );
+            Set<Tag> set = post.getTags();
+            if ( set != null ) {
+                postResponseDTO.setTags( new ArrayList<Tag>( set ) );
+            }
+            Set<PostContent> set1 = post.getContents();
+            if ( set1 != null ) {
+                postResponseDTO.setContents( new ArrayList<PostContent>( set1 ) );
+            }
+            postResponseDTO.setAuthor( post.getAuthor() );
+            postResponseDTO.setCategory( post.getCategory() );
         }
-        postResponseDTO.setId( post.getId() );
-        postResponseDTO.setTitle( post.getTitle() );
-        postResponseDTO.setSubTitle( post.getSubTitle() );
-        postResponseDTO.setThumbnail( post.getThumbnail() );
-        postResponseDTO.setCreatedAt( post.getCreatedAt() );
-        postResponseDTO.setUpdatedAt( post.getUpdatedAt() );
-        postResponseDTO.setPublished( post.getPublished() );
-        Set<Tag> set1 = post.getTags();
-        if ( set1 != null ) {
-            postResponseDTO.setTags( new ArrayList<Tag>( set1 ) );
+        Integer[] authorsOfLike1 = authorsOfLike;
+        if ( authorsOfLike1 != null ) {
+            postResponseDTO.setAuthorsOfLike( Arrays.copyOf( authorsOfLike1, authorsOfLike1.length ) );
         }
-        postResponseDTO.setAuthor( post.getAuthor() );
-        postResponseDTO.setCategory( post.getCategory() );
 
         return postResponseDTO;
     }

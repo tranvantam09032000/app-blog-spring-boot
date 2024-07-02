@@ -1,17 +1,35 @@
 <p-card [routerLink]="'/post/view/' + value?.id" class="p-0 cursor-pointer">
   <ng-template pTemplate="header">
     <p-image
+      [routerLink]="'/post/view/' + value?.id"
       [alt]="value?.title" [src]="value?.thumbnail"
-      [width]="'100'" [height]="heightImage" />
+      [width]="'100'" [height]="heightImage"
+    />
   </ng-template>
   <div>
-    <div [style.width.%]="90" class="text-lg mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.title}}</div>
-    <div [style.width.%]="90" class="white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.subTitle}}</div>
+    <div class="flex align-content-center justify-content-between gap-2">
+      <span
+        class="text-lg mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ value?.title }}</span>
+      <div class="relative">
+        <i class="pi pi-heart-fill " [style.color]="'red'" style="font-size: 2rem">
+        </i>
+        <small class="absolute text-white"
+               [style]="{top: '8px', left: '12px'}">{{ value?.authorsOfLike?.length }}</small>
+      </div>
+    </div>
+    <div [style.width.%]="90" class="white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ value?.subTitle }}
+    </div>
   </div>
   <ng-template pTemplate="footer">
     <div class="flex gap-3">
-      <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.author?.firstName}} {{value?.author?.lastName}}</span>
-      <span class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{value?.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
+      <span
+        class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">
+        {{ value?.author?.firstName }} {{ value?.author?.lastName }}
+      </span>
+      <span
+        class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">
+        {{ value?.createdAt | date : "yyyy/MM/dd HH:mm" }}
+      </span>
     </div>
   </ng-template>
 </p-card>

@@ -29,6 +29,10 @@ export class PostService {
     return this.httpClient.put<number>(`${URL_BASE}/posts/${body.id}`, body)
   }
 
+  likePost(body: {postId: number, authorId: number}) {
+    return this.httpClient.post<boolean>(`${URL_BASE}/posts/like`, body)
+  }
+
   deletePost(id: string) {
     return this.httpClient.delete(`${URL_BASE}/posts/${id}`)
   }

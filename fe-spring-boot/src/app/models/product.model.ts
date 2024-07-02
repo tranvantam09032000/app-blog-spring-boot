@@ -20,6 +20,7 @@ export interface IPost {
   tags: ITag[]
   author: IAuthor
   category: ICategory
+  authorsOfLike: number[];
 }
 
 export interface IContent {

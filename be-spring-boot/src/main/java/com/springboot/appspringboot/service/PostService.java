@@ -3,10 +3,11 @@ package com.springboot.appspringboot.service;
 import com.springboot.appspringboot.dto.request.*;
 import com.springboot.appspringboot.dto.response.PostResponseDTO;
 import com.springboot.appspringboot.entity.*;
+import com.springboot.appspringboot.mapper.LikeOfPostMapper;
 import com.springboot.appspringboot.mapper.PostMapper;
 import com.springboot.appspringboot.repository.AuthorRepository;
 import com.springboot.appspringboot.repository.CategoryRepository;
-import com.springboot.appspringboot.repository.PostContentRepository;
+import com.springboot.appspringboot.repository.LikeOfPostRepository;
 import com.springboot.appspringboot.repository.PostRepository;
 import com.springboot.appspringboot.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,11 @@ public class PostService {
     @Autowired
     private TagRepository tagRepository;
     @Autowired
+    private LikeOfPostRepository likeOfPostRepository;
+    @Autowired
     private PostMapper postMapper;
     @Autowired
-    private PostContentRepository postContentRepository;
+    private LikeOfPostMapper likeOfPostMapper;
 
     public Integer createPost(PostRequestDTO request) {
         Author author = authorRepository.getReferenceById(request.getAuthorId());
@@ -59,7 +62,9 @@ public class PostService {
 
     public PostResponseDTO getPostById(Integer id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
-        return postMapper.postToPostResponseDTO(post);
+        List<LikeOfPost> likesOfPost = this.likeOfPostRepository.findAllByPost_Id(id);
+        Integer[] authorsOfLike = likesOfPost.stream().map(item-> item.getAuthor().getId()).toArray(Integer[]::new);
+        return postMapper.postToPostResponseDTO(post, authorsOfLike);
     }
 
     public PostResponseDTO[] getPosts(Integer page, Integer size, String categoryId) {
@@ -67,12 +72,31 @@ public class PostService {
         Page<Post> listPost = categoryId == null ?
                 postRepository.findPostsByPublished(true, pageable) :
                 postRepository.findPostsByCategory_IdAndPublished(Integer.parseInt(categoryId), true, pageable);
-        return listPost.getContent().stream().map(post -> postMapper.postToPostResponseDTO(post)).toArray(PostResponseDTO[]::new);
+        PostResponseDTO[] postResponseDTOS = listPost.getContent().stream().map(post -> {
+            List<LikeOfPost> likesOfPost = this.likeOfPostRepository.findAllByPost_Id(post.getId());
+            Integer[] authorsOfLike = likesOfPost.stream().map(item-> item.getAuthor().getId()).toArray(Integer[]::new);
+            return postMapper.postToPostResponseDTO(post, authorsOfLike);
+        }).toArray(PostResponseDTO[]::new);
+        return postResponseDTOS;
     }
 
     public void deletePost(Integer id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         post.getTags().removeAll(post.getTags());
         postRepository.deleteById(id);
+    }
+
+    public boolean likePost(LikePostRequestDTO request) {
+        LikeOfPost likeOfPost = this.likeOfPostRepository.getByPostIdAndAuthorId(request.getPostId(), request.getAuthorId());
+        if(likeOfPost != null) {
+            this.likeOfPostRepository.deleteById(likeOfPost.getId());
+            return false;
+        }else {
+            Post post = postRepository.getReferenceById(request.getPostId());
+            Author author = authorRepository.getReferenceById(request.getAuthorId());
+            LikeOfPost likeOfPostRequest = likeOfPostMapper.likeOfPostRequestToLikeOfPost(request, post, author);
+            this.likeOfPostRepository.save(likeOfPostRequest);
+            return true;
+        }
     }
 }

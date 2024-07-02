@@ -93,3 +93,11 @@ Bsrc/main/java/com/springboot/appspringboot/entity/PostContent.java,6/4/646af62
 Psrc/main/java/com/springboot/appspringboot/repository/PostContentRepository.java,3/1/316ecddd81c1ebf7072f716c456511b86f74cd0a
 ~
 Nsrc/main/java/com/springboot/appspringboot/dto/request/PostContentRequest.java,8/5/8569785c370f82ced8699e8f5d2b7bb6af7b39ce
+q
+Asrc/main/java/com/springboot/appspringboot/entity/LikeOfPost.java,b/3/b32abe9953631e9109c60b29e0de811ca50da7be
+~
+Nsrc/main/java/com/springboot/appspringboot/dto/request/LikePostRequestDTO.java,d/d/ddd7f904c46ef0e0d42650e0f570a80d6c556e44
+
+Osrc/main/java/com/springboot/appspringboot/repository/LikeOfPostRepository.java,2/d/2db777d690fbaee7918e0c0f114371a4913f333b
+w
+Gsrc/main/java/com/springboot/appspringboot/mapper/LikeOfPostMapper.java,f/b/fbf8d03ef36b2f7613b3c903d53475c4072a7e15

@@ -1,5 +1,5 @@
 <div class="px-8 mt-5">
-  <div class="border-bottom-2 border-orange-500 pb-2 font-bold">{{category?.title}}</div>
+  <div class="border-bottom-2 border-orange-500 pb-2 font-bold">{{ category?.title }}</div>
   <p-dataView #dv [value]="posts">
     <ng-template pTemplate="list" let-post>
       <div class="grid grid-nogutter">
@@ -10,14 +10,25 @@
               [src]="item.thumbnail"
               [alt]="item.title"
               width="200"
-              height="100" />
+              height="100"/>
           </div>
           <div class="col-12 md:col-10 py-3 cursor-pointer">
-            <div class="font-bold">{{item.title}}</div>
-            <div>{{item.subTitle}}</div>
+            <div class="flex align-content-center justify-content-between gap-2">
+                  <span [routerLink]="'/post/view/' + item?.id"
+                        class="text-lg mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">
+                    {{ item?.title }}
+                  </span>
+              <div class="relative">
+                <i class="pi pi-heart-fill " [style.color]="'red'" style="font-size: 2rem">
+                </i>
+                <small class="absolute text-white"
+                       [style]="{top: '8px', left: '12px'}">{{ item?.authorsOfLike?.length }}</small>
+              </div>
+            </div>
+            <div>{{ item.subTitle }}</div>
             <div class="flex align-items-center justify-content-between mt-3">
-              <span class="text-sm text-500">{{item.author.firstName}} {{item.author.lastName}}</span>
-              <span class="text-sm text-500">{{item.createdAt}}</span>
+              <span class="text-sm text-500">{{ item.author.firstName }} {{ item.author.lastName }}</span>
+              <span class="text-sm text-500">{{ item.createdAt }}</span>
             </div>
           </div>
         </div>

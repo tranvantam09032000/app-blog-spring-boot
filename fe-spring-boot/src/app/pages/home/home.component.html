@@ -11,7 +11,18 @@
             <div class="col-12" *ngFor="let item of post5TopNew; let first = first" class="col-12">
               <div [routerLink]="'/post/view/' + item?.id" class="py-3 cursor-pointer"
                    [ngClass]="{ 'border-top-1 surface-border': !first }">
-                <div>{{ item.title }}</div>
+                <div class="flex align-content-center justify-content-between gap-2">
+                  <span [routerLink]="'/post/view/' + item?.id"
+                        class="text-lg mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">
+                    {{ item?.title }}
+                  </span>
+                  <div class="relative">
+                    <i class="pi pi-heart-fill " [style.color]="'red'" style="font-size: 2rem">
+                    </i>
+                    <small class="absolute text-white"
+                           [style]="{top: '8px', left: '12px'}">{{ item?.authorsOfLike?.length }}</small>
+                  </div>
+                </div>
                 <div class="flex align-items-center justify-content-between mt-3">
                   <span class="text-sm text-500">{{ item.author.firstName }} {{ item.author.lastName }}</span>
                   <span class="text-sm text-500">{{ item.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
@@ -43,8 +54,17 @@
           <div [routerLink]="'/post/view/' + post?.id" class="col-12 md:col-6 cursor-pointer">
             <p-card class="p-0">
               <div>
-                <div [style.width.%]="90"
-                     class="mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ post?.title }}
+                <div class="flex align-content-center justify-content-between gap-2">
+                  <span [routerLink]="'/post/view/' + post?.id"
+                        class="text-lg mb-2 font-bold white-space-nowrap overflow-hidden text-overflow-ellipsis">
+                    {{ post?.title }}
+                  </span>
+                  <div class="relative">
+                    <i class="pi pi-heart-fill " [style.color]="'red'" style="font-size: 2rem">
+                    </i>
+                    <small class="absolute text-white"
+                           [style]="{top: '8px', left: '12px'}">{{ post?.authorsOfLike?.length }}</small>
+                  </div>
                 </div>
                 <div [style.width.%]="90"
                      class="white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ post?.subTitle }}
@@ -53,9 +73,13 @@
               <ng-template pTemplate="footer">
                 <div class="flex gap-3">
                   <span
-                    class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ post?.author?.firstName }} {{ post?.author?.lastName }}</span>
+                    class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">
+                    {{ post?.author?.firstName }} {{ post?.author?.lastName }}
+                  </span>
                   <span
-                    class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ post?.createdAt | date : "yyyy/MM/dd HH:mm" }}</span>
+                    class="text-500 white-space-nowrap overflow-hidden text-overflow-ellipsis">
+                    {{ post?.createdAt | date : "yyyy/MM/dd HH:mm" }}
+                  </span>
                 </div>
               </ng-template>
             </p-card>

@@ -9,6 +9,7 @@ import {CommentsComponent} from "../../components/comments/comments.component";
 import {GalleriaModule} from "primeng/galleria";
 import {IContent, IPost} from "../../models/product.model";
 import {PostService} from "../../services/post.service";
+import {ComponentGenerationDirective} from "../../directives/component-generation.directive";
 
 @Component({
   selector: 'app-view-post',
@@ -17,14 +18,15 @@ import {PostService} from "../../services/post.service";
     ImageModule,
     TagModule,
     CommentsComponent,
-    GalleriaModule
+    GalleriaModule,
+    ComponentGenerationDirective
   ],
   templateUrl: './view-post.component.html',
   styleUrl: './view-post.component.scss'
 })
 export class ViewPostComponent implements OnInit, OnDestroy {
 
-  post?: IPost;
+  post: IPost = {} as IPost;
   destroy$ = new Subject();
 
   constructor(private route: ActivatedRoute, private postService: PostService,
@@ -70,9 +72,23 @@ export class ViewPostComponent implements OnInit, OnDestroy {
     )
   }
 
+  likePost(postId: number) {
+    const body = {
+      postId: postId,
+      authorId: 5
+    }
+    this.postService.likePost(body).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(
+      (value) => {
+        value ?
+          this.post.authorsOfLike.push(body.authorId) :
+          this.post.authorsOfLike = this.post?.authorsOfLike.filter(item => item !== body.authorId)
+      }
+    )
+  }
+
   ngOnDestroy() {
     this.destroy$.next(null);
   }
-
-  protected readonly Array = Array;
 }

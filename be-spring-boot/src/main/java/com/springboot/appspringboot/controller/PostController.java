@@ -43,4 +43,10 @@ public class PostController {
     void deletePost(@PathVariable Integer id) {
         postService.deletePost(id);
     }
+
+    @CrossOrigin
+    @PostMapping("/like")
+    boolean likePost(@RequestBody LikePostRequestDTO request) {
+        return postService.likePost(request);
+    }
 }

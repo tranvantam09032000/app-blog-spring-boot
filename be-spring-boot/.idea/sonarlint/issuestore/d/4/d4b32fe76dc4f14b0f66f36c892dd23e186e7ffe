@@ -1,19 +1,23 @@
 
+°
+java:S1488K"hImmediately return this expression instead of assigning it to the temporary variable "postResponseDTOS".(½’•±üÿÿÿÿ8›†ñ‡2J$c1e1b4e7-25ed-40ce-8cab-ddcbee359a58
 —
-java:S11921"ODefine a constant instead of duplicating this literal "Post not found" 3 times.(½äÌûÿÿÿÿ8ÕÙï²‚2J$81569f15-c740-4eee-b837-587969ffa245
+java:S11924"ODefine a constant instead of duplicating this literal "Post not found" 3 times.(½äÌûÿÿÿÿ8íßğ‡2J$2e488620-8278-40a7-a17a-0448d4ab373c
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$962aac4c-2069-40a6-9828-5cc0fdc6fefe
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$d38d9883-fc06-40c0-ac7c-339303b76b02
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$cd1c5e12-a2bd-4191-a6dd-8530ca560eda
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$fba85df3-01cf-45b1-8c95-35cc978ac19d
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$275f80cb-485c-4d42-91f7-781ed6e39d70
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$99ea2cf5-2407-4182-b5c1-e9b0f0eb55ea
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$6e342bbc-f835-4c58-828d-b402937c57ad
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$94ad78ba-378e-4eff-a8ce-e05d14be166c
 …
-java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$6a5e77f8-3206-4824-a414-9c07dc2dace7
+java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$885dbcdb-c5bf-4fcd-9a7c-5aa74ff5bdcc
 …
-java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞ8ÕÙï²‚2J$39e0f9c8-2766-4a80-bdaf-eea5c0377be5
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$3d0ea068-d83a-441a-ab32-dde9fe0357c5
+…
+java:S6813%"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$37ea4c74-dfe2-4e24-9f8d-c2d64214f905
 „
-java:S18541"<Remove this useless assignment to local variable "postById".(½äÌûÿÿÿÿ8èØêÒ…2J$46717ff8-df45-477c-8bf8-4f47f2dcbaae
+java:S18544"<Remove this useless assignment to local variable "postById".(½äÌûÿÿÿÿ8ñßğ‡2J$da857854-c093-4943-9362-e57f56c1ca91
 u
-java:S14811"-Remove this unused "postById" local variable.(½äÌûÿÿÿÿ8èØêÒ…2J$84334db7-1ed3-4ef9-9ad5-c8817d2cb146
+java:S14814"-Remove this unused "postById" local variable.(½äÌûÿÿÿÿ8ñßğ‡2J$8ae1f13c-8092-4551-b8a8-104f490160e2
