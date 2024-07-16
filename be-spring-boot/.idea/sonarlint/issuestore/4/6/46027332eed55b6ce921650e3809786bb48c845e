@@ -1,0 +1,9 @@
+
+…
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÉËÎ•‰2J$04269fd1-72b1-4c95-a9dc-a8111c31c919
+i
+java:S1128"GRemove this unused import 'com.springboot.appspringboot.entity.Author'.(·ÊŒ¾ùÿÿÿÿ8ÎÆåá‹2
+l
+java:S1128"ORemove this unused import 'org.springframework.web.bind.annotation.GetMapping'.(‡¡‰Ø8ÎÆåá‹2
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ÎÆåá‹2
