@@ -1,3 +1,9 @@
 
+	java:S112P"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ñî¹ß‹2J$a0a54500-48bd-4d3b-99fe-44f90b049bdf
+—	java:S116'"URename this field "SIGNER_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëü§™8òî¹ß‹2J$df53c11d-d250-4bdf-823e-0ea023f233fb
+…
+java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞ8òî¹ß‹2J$0bc6ceee-b28b-4e26-ba82-922200d24bc4
+…
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8òî¹ß‹2J$d458a00b-017c-442a-bda7-0d24f3e89fc5
 ~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$bb8138cc-8d4c-4b24-a238-899616ded326
+java:S1128	";Remove this unused import 'com.nimbusds.jwt.JWTClaimNames'.(Œ¹¸º8úî¹ß‹2J$c15cc8b1-7615-494d-a916-f1c690e5bf73

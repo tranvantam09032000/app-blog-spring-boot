@@ -22,6 +22,8 @@ public interface PostMapper {
     @Mapping(target = "tags", source = "tags")
     @Mapping(target = "id", source = "postRequestDTO.id")
     @Mapping(target = "title", source = "postRequestDTO.title")
+    @Mapping(target = "createdAt", source = "postRequestDTO.createdAt")
+    @Mapping(target = "updatedAt", source = "postRequestDTO.updatedAt")
     Post postRequestToPost(PostRequestDTO postRequestDTO, Author author, Category category, Set<Tag> tags);
 
     @AfterMapping

@@ -20,3 +20,5 @@ spring:
           audit_table_suffix: _aud
           store_data_at_delete: true
     show-sql: true
+jwt:
+ signerKey: "HWSbPYI/kNBq+oCpqhliqx7P60nt5ubT9rHokaEDf5WnxPmTa+BtYHRBDbXqHYod"

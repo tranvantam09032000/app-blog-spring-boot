@@ -1,5 +1,6 @@
 package com.springboot.appspringboot.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboot.appspringboot.abstracts.AuditableAbstract;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "author")
 @Builder
-public class Author {
+public class Author extends AuditableAbstract {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;

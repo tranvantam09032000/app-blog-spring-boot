@@ -24,12 +24,10 @@ public class LikeOfPostMapperImpl implements LikeOfPostMapper {
 
         if ( likePostRequestDTO != null ) {
             likeOfPost.setId( likePostRequestDTO.getId() );
+            likeOfPost.setCreatedAt( likePostRequestDTO.getCreatedAt() );
+            likeOfPost.setUpdatedAt( likePostRequestDTO.getUpdatedAt() );
         }
-        if ( post != null ) {
-            likeOfPost.setPost( post );
-            likeOfPost.setCreatedAt( post.getCreatedAt() );
-            likeOfPost.setUpdatedAt( post.getUpdatedAt() );
-        }
+        likeOfPost.setPost( post );
         likeOfPost.setAuthor( author );
 
         return likeOfPost;

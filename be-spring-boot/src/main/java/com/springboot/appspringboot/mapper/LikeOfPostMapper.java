@@ -12,5 +12,7 @@ public interface LikeOfPostMapper {
     @Mapping(target = "post", source = "post")
     @Mapping(target = "author", source = "author")
     @Mapping(target = "id", source = "likePostRequestDTO.id")
+    @Mapping(target = "createdAt", source = "likePostRequestDTO.createdAt")
+    @Mapping(target = "updatedAt", source = "likePostRequestDTO.updatedAt")
     LikeOfPost likeOfPostRequestToLikeOfPost(LikePostRequestDTO likePostRequestDTO, Post post, Author author);
 }
