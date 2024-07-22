@@ -1,9 +1,11 @@
 
-	java:S112P"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ñî¹ß‹2J$a0a54500-48bd-4d3b-99fe-44f90b049bdf
-—	java:S116'"URename this field "SIGNER_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëü§™8òî¹ß‹2J$df53c11d-d250-4bdf-823e-0ea023f233fb
+	java:S112{"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ŒºØ2J$d3c7feaa-7fbe-4381-8e51-65f6e2324f34
+—	java:S116."URename this field "SIGNER_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëü§™8ºØ2J$cf399eef-0ece-4a85-b87b-25a97db266d7
+›	java:S1161"YRename this field "VALID_DURATION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆçï˜8ºØ2J$984cc91a-bd38-4591-9b90-f254fc2ad9bc
+¡	java:S1164"_Rename this field "REFRESHABLE_DURATION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µĞ²8ºØ2J$d995befd-51fc-4f64-b2d6-5c878145865b
 …
-java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞ8òî¹ß‹2J$0bc6ceee-b28b-4e26-ba82-922200d24bc4
+java:S6813&"BRemove this field injection and use constructor injection instead.(êæÄŞ8ºØ2J$8760682f-c462-4471-a50b-dad29ee0c174
 …
-java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8òî¹ß‹2J$d458a00b-017c-442a-bda7-0d24f3e89fc5
-~
-java:S1128	";Remove this unused import 'com.nimbusds.jwt.JWTClaimNames'.(Œ¹¸º8úî¹ß‹2J$c15cc8b1-7615-494d-a916-f1c690e5bf73
+java:S6813("BRemove this field injection and use constructor injection instead.(êæÄŞ8ºØ2J$f84afe3c-d73d-43e1-acb2-5f5274e5de7c
+…
+java:S6813*"BRemove this field injection and use constructor injection instead.(êæÄŞ8ºØ2J$04a017ed-98e8-4739-82c5-b5585db80d95
