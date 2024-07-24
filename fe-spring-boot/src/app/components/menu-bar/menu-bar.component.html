@@ -8,6 +8,7 @@
         @if(isButtonCreate) {
           <p-button [routerLink]="'/post/create'" label="Create Post" />
         }
+        <p-button (click)="logout()" icon="pi pi-sign-out" severity="danger"/>
       </div>
     </ng-template>
   </p-menubar>

@@ -89,7 +89,7 @@
                                 (focusout)="updateValueSlider(i, itemIndex, $event)"
                                 [value]="this.contents.controls[index].get('value')?.value[itemIndex]" pInputText
                                 class="w-full" placeholder="Enter image"/>
-                                <p-button (onClick)="removeImageSlider(i, itemIndex)" label="Delete" severity="danger"/>
+                              <p-button (onClick)="removeImageSlider(i, itemIndex)" label="Delete" severity="danger"/>
                             </div>
                           }
                         </div>
@@ -119,26 +119,6 @@
         [ngClass]="{'ng-invalid ng-dirty': submit && form.controls['thumbnail'].errors}"
         id="thumbnail"
         formControlName="thumbnail"/>
-    </div>
-    <div class="flex flex-column gap-2 mt-3">
-      <label for="author">Author</label>
-      <p-dropdown
-        [options]="authors"
-        [styleClass]="'w-full'"
-        [ngClass]="{'ng-dirty ng-invalid': submit && form.controls['authorId'].errors}"
-        formControlName="authorId"
-        id="author"
-        optionValue="id"
-      >
-        <ng-template let-item pTemplate="selectedItem">
-          <div class="flex align-items-center gap-2">
-            <span>{{ item.firstName }} {{ item.lastName }}</span>
-          </div>
-        </ng-template>
-        <ng-template let-item pTemplate="item">
-          <span>{{ item.firstName }} {{ item.lastName }}</span>
-        </ng-template>
-      </p-dropdown>
     </div>
     <div class="flex flex-column gap-2 mt-3">
       <label for="category">Category</label>

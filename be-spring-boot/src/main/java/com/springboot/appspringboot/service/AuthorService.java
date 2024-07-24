@@ -70,7 +70,7 @@ public class AuthorService {
             throw new AppException(ErrorCode.UNAUTHENTICATED);
         }
         return AuthenticationResponseDTO.builder()
-                .token(generateToken(request.getEmail()))
+                .token(generateToken(request.getEmail(), author))
                 .build();
     }
 
@@ -83,7 +83,7 @@ public class AuthorService {
         );
 
         return AuthenticationResponseDTO.builder()
-                .token(generateToken(author.getEmail()))
+                .token(generateToken(author.getEmail(), author))
                 .build();
     }
 
@@ -104,14 +104,14 @@ public class AuthorService {
     }
 
 
-    private String generateToken(String email) {
+    private String generateToken(String email, Author author) {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(email)
                 .issuer("tranvantam")
                 .issueTime(new Date())
                 .expirationTime(new Date(Instant.now().plus(VALID_DURATION, ChronoUnit.SECONDS).toEpochMilli()))
-                .claim("custom", "custom")
+                .claim("userInfo", author)
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());

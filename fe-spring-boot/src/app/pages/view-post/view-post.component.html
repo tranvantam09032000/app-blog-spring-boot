@@ -10,11 +10,11 @@
     <div class="font-bold">{{ post?.author?.firstName }} {{ post?.author?.lastName }}</div>
     <div class="font-bold">{{ post?.createdAt }}</div>
     <div (click)="likePost(post.id)" class="relative cursor-pointer">
-      <i [class]="post.authorsOfLike.includes(5) ? 'pi-heart-fill':'pi-heart'" [style.color]="'red'"
+      <i [class]="post.authorsOfLike?.includes(5) ? 'pi-heart-fill':'pi-heart'" [style.color]="'red'"
          class="pi"
          style="font-size: 2rem">
       </i>
-      <small [class]="post.authorsOfLike.includes(5) ? 'text-white':'text-black'" class="absolute"
+      <small [class]="post.authorsOfLike?.includes(5) ? 'text-white':'text-black'" class="absolute"
              [style]="{top: '8px', left: '12px'}">{{ post?.authorsOfLike?.length }}</small>
     </div>
   </div>

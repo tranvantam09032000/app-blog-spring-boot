@@ -14,14 +14,14 @@ import {StepperModule} from "primeng/stepper";
 import {AvatarModule} from "primeng/avatar";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {GalleriaModule} from "primeng/galleria";
-import {IAuthor} from "../../models/author.model";
 import {ICategory} from "../../models/category.model";
 import {ITag} from "../../models/tag.model";
 import {PostService} from "../../services/post.service";
-import {AuthorService} from "../../services/author.service";
 import {CategoryService} from "../../services/category.service";
 import {TagService} from "../../services/tag.service";
 import {IContent, IFormPost} from "../../models/product.model";
+import {IUserInfo} from "../../models/auth.model";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-form-post',
@@ -46,7 +46,6 @@ import {IContent, IFormPost} from "../../models/product.model";
 })
 export class FormPostComponent implements OnInit, OnDestroy {
   @ViewChild("stepper") stepper?: any;
-  authors: IAuthor[] = [];
   categories: ICategory[] = [];
   tags: ITag[] = [];
   contentTypes: Record<string, string>[] = [
@@ -74,10 +73,10 @@ export class FormPostComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
               private postService: PostService,
-              private authorService: AuthorService,
               private categoryService: CategoryService,
               private tagService: TagService,
-              private router: Router, private messageService: MessageService) {
+              private router: Router, private messageService: MessageService,
+              private cookie: CookieService) {
   }
 
   ngOnInit() {
@@ -92,20 +91,14 @@ export class FormPostComponent implements OnInit, OnDestroy {
       }
     });
     combineLatest(
-      this.authorService.getAuthors(),
       this.tagService.getTags(),
       this.categoryService.getCategories()
     ).pipe(takeUntil(this.destroy$)).subscribe(
-      ([authors, tags, categories]) => {
-        this.authors = authors;
+      ([tags, categories]) => {
         this.tags = tags;
         this.categories = categories;
       }
     )
-  }
-
-  get f() {
-    return this.form.controls;
   }
 
   get contents(): FormArray {
@@ -200,6 +193,7 @@ export class FormPostComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.submit = true;
     if (this.form.invalid) return;
+    const userInfo: IUserInfo = JSON.parse(this.cookie.get("userInfo"));
     const body = this.form.value;
     body.contents = body.contents.map((item: IContent, index: number) => {
       if (item.type === "slider") {
@@ -208,7 +202,7 @@ export class FormPostComponent implements OnInit, OnDestroy {
         return {...item, position: index};
       }
     })
-    body.authorId = Number(body.authorId);
+    body.authorId = Number(userInfo.id);
     body.categoryId = Number(body.categoryId);
     body.tags = body.tags.map((item: string) => Number(item))
     body.id ? this.updatePost(body) : this.createPost(body);

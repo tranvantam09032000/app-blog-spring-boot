@@ -5,6 +5,7 @@ import {MenuItem, PrimeTemplate} from "primeng/api";
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
 import {CategoryService} from "../../services/category.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-menu-bar',
@@ -26,12 +27,15 @@ export class MenuBarComponent implements OnInit, OnDestroy {
     },
   ];
   isShowMenu: boolean = false;
-  isButtonCreate: boolean = false;
+  isButtonCreate: boolean = true;
   isButtonUpdate: boolean = false;
   id: string = "";
   destroy$ = new Subject();
 
-  constructor(private router: Router, private route: ActivatedRoute, private categoryService: CategoryService) {
+  constructor(private router: Router,
+              private categoryService: CategoryService,
+              private cookie: CookieService
+  ) {
 
   }
 
@@ -61,6 +65,11 @@ export class MenuBarComponent implements OnInit, OnDestroy {
       this.items?.push(data)
       this.isShowMenu = true;
     })
+  }
+
+  logout() {
+    this.cookie.delete("token");
+    this.router.navigateByUrl("/login")
   }
 
   ngOnDestroy() {

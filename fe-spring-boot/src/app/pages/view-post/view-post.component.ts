@@ -10,6 +10,8 @@ import {GalleriaModule} from "primeng/galleria";
 import {IContent, IPost} from "../../models/product.model";
 import {PostService} from "../../services/post.service";
 import {ComponentGenerationDirective} from "../../directives/component-generation.directive";
+import {CookieService} from "ngx-cookie-service";
+import {IUserInfo} from "../../models/auth.model";
 
 @Component({
   selector: 'app-view-post',
@@ -30,7 +32,8 @@ export class ViewPostComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
 
   constructor(private route: ActivatedRoute, private postService: PostService,
-              private router: Router, private messageService: MessageService) {
+              private router: Router, private messageService: MessageService,
+              private cookie: CookieService) {
   }
 
   ngOnInit() {
@@ -73,9 +76,10 @@ export class ViewPostComponent implements OnInit, OnDestroy {
   }
 
   likePost(postId: number) {
+    const userInfo: IUserInfo = JSON.parse(this.cookie.get("userInfo"));
     const body = {
       postId: postId,
-      authorId: 5
+      authorId: userInfo.id
     }
     this.postService.likePost(body).pipe(
       takeUntil(this.destroy$)
