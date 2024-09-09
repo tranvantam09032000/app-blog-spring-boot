@@ -1,54 +1,39 @@
 package com.springboot.appspringboot.exception;
-
-import com.springboot.appspringboot.dto.request.ApiResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
-    @ExceptionHandler(value = Exception.class)
-    ResponseEntity<ApiResponse> handlingRuntimeException(RuntimeException exception) {
-        ApiResponse apiResponse = new ApiResponse();
-
-        apiResponse.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
-        apiResponse.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
-
-        return ResponseEntity.badRequest().body(apiResponse);
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        errors.put("status", HttpStatus.NOT_FOUND.value());
+        return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = AppException.class)
-    ResponseEntity<ApiResponse> handlingAppException(AppException exception) {
-        ErrorCode errorCode = exception.getErrorCode();
-        ApiResponse apiResponse = new ApiResponse();
-
-        apiResponse.setCode(errorCode.getCode());
-        apiResponse.setMessage(errorCode.getMessage());
-
-        return ResponseEntity.badRequest().body(apiResponse);
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("status", HttpStatus.BAD_REQUEST.value());
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String errorMessage = error.getDefaultMessage();
+            errors.put("message", errorMessage);
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    ResponseEntity<ApiResponse> handlingValidation(MethodArgumentNotValidException exception) {
-        String enumKey = exception.getFieldError().getDefaultMessage();
-
-        ErrorCode errorCode = ErrorCode.INVALID_KEY;
-
-        try {
-            errorCode = ErrorCode.valueOf(enumKey);
-        } catch (IllegalArgumentException e) {
-
-        }
-
-        ApiResponse apiResponse = new ApiResponse();
-
-        apiResponse.setCode(errorCode.getCode());
-        apiResponse.setMessage(errorCode.getMessage());
-
-        return ResponseEntity.badRequest().body(apiResponse);
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGlobalException(Exception ex) {
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("status", HttpStatus.BAD_REQUEST.value());
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
-
-
 }

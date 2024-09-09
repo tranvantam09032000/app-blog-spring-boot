@@ -1,3 +1,3 @@
 
-¢	java:S116"[Rename this field "PUBLIC_ENDPOINTS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÁÄÓºùÿÿÿÿ8¾´á‹2J$d58fe08c-c521-495a-aa35-1a0914b4c4ad
-—	java:S116"URename this field "SIGNER_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëü§™8¾´á‹2J$c5a7571b-faeb-493c-a710-98b460ef85c4
+…
+java:S1874"BRemove this use of "EnableGlobalMethodSecurity"; it is deprecated.(ö­ê×8ì€õ¸2J$a58f2487-49b2-46f1-9a86-64dc950a61ec

@@ -1,3 +1,4 @@
 
-~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$339b8582-a077-40e9-81cd-512f683edf88
+¨
+java:S1488$"`Immediately return this expression instead of assigning it to the temporary variable "category".(š¦¬‹ıÿÿÿÿ8×¸Åº2J$0f1838c6-5ad8-453c-aab7-c2265bc1a345
+†	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Å×ÙıÿÿÿÿJ$4bd5318b-cb9f-4840-bf06-00b3ec0f5a07

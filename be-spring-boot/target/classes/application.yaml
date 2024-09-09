@@ -1,9 +1,13 @@
 server:
   port: 8080
   servlet:
-    context-path: /identity
+    context-path: /blogs/api
 
 spring:
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    table: flyway_schema_history
   datasource:
     url: "jdbc:mysql://localhost:3306/db_blogs"
     username: root
@@ -21,6 +25,4 @@ spring:
           store_data_at_delete: true
     show-sql: true
 jwt:
- signerKey: "HWSbPYI/kNBq+oCpqhliqx7P60nt5ubT9rHokaEDf5WnxPmTa+BtYHRBDbXqHYod"
- valid-duration: 86400 # in second
- refreshable-duration: 172800 # in seconds
+  secret: "HWSbPYI/kNBq+oCpqhliqx7P60nt5ubT9rHokaEDf5WnxPmTa+BtYHRBDbXqHYod"

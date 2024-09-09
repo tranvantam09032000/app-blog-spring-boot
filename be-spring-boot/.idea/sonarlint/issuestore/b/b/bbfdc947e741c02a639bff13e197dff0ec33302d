@@ -1,3 +1,4 @@
 
-~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$e3619f78-78cd-4f1c-9169-7fda4ae17dcf
+£
+java:S1488$"[Immediately return this expression instead of assigning it to the temporary variable "tag".(Ü¯Ùüÿÿÿÿ8‹ÿ£º2J$84719bcd-3393-4326-ac21-5cd8cba68df2
+	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(¼ìŒ•üÿÿÿÿ8”¡šº2J$6b2c606b-2f40-4125-bb22-a065d0c2301a

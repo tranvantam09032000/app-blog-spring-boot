@@ -74,5 +74,6 @@ export class MenuBarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.destroy$.next(null);
+    this.destroy$.complete();
   }
 }

@@ -1,8 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {MenuBarComponent} from "./components/menu-bar/menu-bar.component";
 import {NavigationStart, Router, RouterOutlet} from "@angular/router";
 import {FooterComponent} from "./components/footer/footer.component";
 import {ToastModule} from "primeng/toast";
+import {AuthService} from "./services/auth.service";
+import {CookieService} from "ngx-cookie-service";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -16,11 +19,12 @@ import {ToastModule} from "primeng/toast";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
   title = 'fe-spring-boot';
-  isShow = true;
+  isShow = false;
+  destroy$ = new Subject();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService,private cookie: CookieService) {
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -28,5 +32,10 @@ export class AppComponent {
       }
     });
 
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(null);
+    this.destroy$.complete();
   }
 }

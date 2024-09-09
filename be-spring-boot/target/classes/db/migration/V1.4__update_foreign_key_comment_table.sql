@@ -1,6 +1,0 @@
-ALTER TABLE comment
-DROP FOREIGN KEY FK_postId;
-
-ALTER TABLE comment
-    ADD CONSTRAINT FK_postID
-        FOREIGN KEY (postId) REFERENCES post(id);

@@ -224,5 +224,6 @@ export class FormPostComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.destroy$.next(null);
+    this.destroy$.complete();
   }
 }

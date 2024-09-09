@@ -1,21 +1,0 @@
-
-—
-java:S11925"ODefine a constant instead of duplicating this literal "Post not found" 3 times.(½äÌûÿÿÿÿ8íßğ‡2J$9d0b6569-3fc8-4243-8381-97f31f632f50
-…
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$83ff5e8b-d53a-4d5a-847b-dc8ed4d7a003
-…
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$9ee880fb-2140-4b1d-b11b-8cd19494448f
-…
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$28b25eee-5d05-4945-8db2-f98e05b86390
-…
-java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$e10eff62-f153-40c6-aa0a-3e1b19469f32
-…
-java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$3365b053-16b9-466f-ad45-f10599143221
-…
-java:S6813$"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$1c2e037e-f730-44ef-a239-a343e93627da
-…
-java:S6813&"BRemove this field injection and use constructor injection instead.(êæÄŞ8íßğ‡2J$fe6bcd57-02d9-408f-8da9-ac272cb6c67e
-„
-java:S18545"<Remove this useless assignment to local variable "postById".(½äÌûÿÿÿÿ8ñßğ‡2J$97348a26-5ebb-4e57-bc82-b7d9adabe9c2
-u
-java:S14815"-Remove this unused "postById" local variable.(½äÌûÿÿÿÿ8ñßğ‡2J$4c6b5b69-8889-4a66-8a63-6d23648ea608
